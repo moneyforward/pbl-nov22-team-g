@@ -8,5 +8,8 @@ public interface UsersDao {
     List<Users> getUserList();
     Users checkUser(String NickName);
     boolean userRegister(Users users);
+    boolean updateUser(Users users);
+    boolean deleteUser(Users users);
+
 
 }

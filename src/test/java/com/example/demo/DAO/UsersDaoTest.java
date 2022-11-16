@@ -11,7 +11,7 @@ import java.util.List;
 public class UsersDaoTest {
     SqlSession sqlSession;
     @Test
-    public void test(){
+    public void testfindlist(){
 
 
         sqlSession = MybBatisUtils.getSqlSession();
@@ -23,8 +23,23 @@ public class UsersDaoTest {
         }
 
 
-        //关闭sqlSession
+
         sqlSession.close();
 
+    }
+    @Test
+    public void testinsert(){
+        sqlSession = MybBatisUtils.getSqlSession();
+        UsersDao mapper = sqlSession.getMapper(UsersDao.class);
+        Users test1 = new Users("abc","1234556","qyx@mf.com");
+        if(mapper.userRegister(test1)){
+            sqlSession.commit();
+            System.out.println("Register ok!");
+        }else{
+            sqlSession.rollback();
+            System.out.println("Register error!");
+
+        }
+        sqlSession.close();
     }
 }
