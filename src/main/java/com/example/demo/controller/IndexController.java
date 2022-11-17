@@ -30,4 +30,14 @@ public class IndexController {
     public String profile() {
         return "user/profile";
     }
+
+    @GetMapping("/booklist")
+    public String booklist() {
+        return "books/booklist";
+    }
+
+    @GetMapping("/bookdetail")
+    public String bookdetail() {
+        return "books/bookdetail";
+    }
 }
