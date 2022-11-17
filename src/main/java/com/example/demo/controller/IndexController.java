@@ -56,12 +56,19 @@ public class IndexController {
     }
 
     @GetMapping("/booklist")
-    public String booklist() {
+    public String bookList() {
         return "books/booklist";
     }
 
     @GetMapping("/bookdetail")
-    public String bookdetail() {
+    public String bookDetail() {
         return "books/bookdetail";
     }
+
+    @GetMapping("/admin")
+    public String adminLogin(){return "admin/login";}
+
+    @GetMapping("/console")
+    public String adminProfile(){return "admin/console";}
+
 }
