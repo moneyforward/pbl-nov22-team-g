@@ -16,7 +16,7 @@ public interface UsersDao {
     @Select("select * from libsystem.Useres where Nickname = #{Nickname} ")
     Users checkUser(String NickName);
     boolean userRegister(Users users);
-    @Select("select * from libsystem.Users where Email = #{Email}")
+    @Select("select * from users where Email = #{Email}")
     Users getUserbyEmail(String Email);
     @Update("update libsystem.Users set Nickname = #{Nickname},Password = #{Password},Email = #{Email} where UserID = #{UserID}")
     int updateUser(Users users);
