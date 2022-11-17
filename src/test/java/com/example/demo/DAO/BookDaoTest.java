@@ -14,7 +14,7 @@ public class BookDaoTest {
 
         sqlSession = MybBatisUtils.getSqlSession();
         BookDao mapper = sqlSession.getMapper(BookDao.class);
-        Book result = mapper.findBook("1984");
+        Book result = mapper.findBookbyTitle("1984");
 
 
         sqlSession.close();
