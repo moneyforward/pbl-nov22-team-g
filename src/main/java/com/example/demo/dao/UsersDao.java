@@ -3,11 +3,12 @@ package com.example.demo.dao;
 import com.example.demo.pojo.Users;
 import lombok.Data;
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
-
+@Mapper
 public interface UsersDao {
     List<Users> getUserList();
     @Select("select * from libsystem.Useres where Nickname = #{Nickname} ")

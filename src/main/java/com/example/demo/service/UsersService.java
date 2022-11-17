@@ -2,14 +2,22 @@ package com.example.demo.service;
 
 import com.example.demo.dao.UsersDao;
 import com.example.demo.pojo.Users;
-import com.example.demo.utils.MybBatisUtils;
-import org.apache.ibatis.session.SqlSession;
 
-public class UsersService {
-    SqlSession sqlSession = MybBatisUtils.getSqlSession();
-    UsersDao mapper = sqlSession.getMapper(UsersDao.class);
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+
+@Service
+public class UsersService implements UserServiceInter{
+
+//    SqlSession sqlSession = MybBatisUtils.getSqlSession();
+    @Autowired(required = false)
+    private UsersDao mapper;
+//    UsersDao mapper = sqlSession.getMapper(UsersDao.class);
+    @Override
     public String userLogin(String useremail, String password){
+
+
         Users user = mapper.getUserbyEmail(useremail);
         if(user.getPassword().equals(password)){
             return user.getNickname();
