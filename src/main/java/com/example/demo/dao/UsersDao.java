@@ -13,8 +13,8 @@ public interface UsersDao {
     @Select("select * from libsystem.Useres where Nickname = #{Nickname} ")
     Users checkUser(String NickName);
     boolean userRegister(Users users);
-    @Select("select * from libsystem.Users where UserID = #{UserID}")
-    Users getUserbyId(int UserID);
+    @Select("select * from libsystem.Users where Email = #{Email}")
+    Users getUserbyEmail(String Email);
     @Update("update libsystem.Users set Nickname = #{Nickname},Password = #{Password},Email = #{Email} where UserID = #{UserID}")
     int updateUser(Users users);
     @Delete("delete from libsystem.Users where UserID = #{UserID}")
