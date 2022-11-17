@@ -11,12 +11,11 @@ import org.springframework.stereotype.Service;
 public class UsersService implements UserServiceInter{
 
 //    SqlSession sqlSession = MybBatisUtils.getSqlSession();
-    @Autowired(required = false)
+    @Autowired
     private UsersDao mapper;
 //    UsersDao mapper = sqlSession.getMapper(UsersDao.class);
     @Override
     public String userLogin(String useremail, String password){
-
 
         Users user = mapper.getUserbyEmail(useremail);
         if(user.getPassword().equals(password)){
