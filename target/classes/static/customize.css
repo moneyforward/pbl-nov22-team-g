@@ -1,0 +1,52 @@
+@media screen and (min-width:800px) {
+    .card {
+        width: 29rem;
+        height: 35rem;
+        float: left;
+        margin: 5px
+    }
+}
+
+@media screen and (max-width:800px) {
+    .card {
+        width: 25rem;
+        height: 35rem;
+        float: left;
+        margin: 5px;
+    }
+}
+
+h1{
+    padding: 1rem;
+    clear: both
+}
+
+#news{
+    display:inline-block
+
+}
+
+.userform{
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 5rem;
+}
+
+.nav-tabs{
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 1rem;
+}
+
+#tab_content {
+    padding-left: 5rem;
+    margin-top: 1rem;
+    width: 500px;
+    height: 800px;
+    overflow: hidden;
+}
+
+.tab-pane {
+    width: 100%;
+    height: 100%;
+}
