@@ -12,4 +12,5 @@
         insert INTO libsystem.Users(Nickname,Password,Email)
         values(#{Nickname},#{Password},#{Email})
     </insert>
+
 </mapper>

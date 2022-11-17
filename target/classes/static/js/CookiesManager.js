@@ -31,3 +31,11 @@ function logOut(){
     location.href=""
 }
 $("#logout").onclick=logOut
+
+function ifLogin(type){
+    if(type==="user") {
+        return $.cookie("userid") != null
+    }else{
+        return $.cookie("adminid") != null
+    }
+}

@@ -26,7 +26,7 @@
       <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="booklist">Library
+            <a class="nav-link active" href="/booklist">Library
               <span class="visually-hidden">(current)</span>
             </a>
           </li>
@@ -49,8 +49,8 @@
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="username"
                href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="showDropdown('2')">username</a>
             <div class="dropdown-menu" id="dropdown2">
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">ID QRcode</a>
+              <a class="dropdown-item" href="/profile">Profile</a>
+              <a class="dropdown-item" th:href="@{/profile#t_5}">ID QRcode</a>
               <a class="dropdown-item" href="#">Setting</a>
             </div>
           </li>
@@ -59,7 +59,7 @@
           <input class="form-control me-sm-2" type="text" placeholder="Search">
           <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a href="login" id="login-btn" class="nav-link active">
+        <a href="/login" id="login-btn" class="nav-link active">
           <input type="button" value="Log in" class="btn btn-primary">
         </a>
         <input type="button" value="Log out" class="btn btn-primary" id="logout">
