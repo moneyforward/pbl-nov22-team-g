@@ -12,7 +12,7 @@ function editEmail(){
     $("#emailDisabledInput").removeAttr("disabled")
 }
 
-function tableInnerLine(bookTitle){
+function tableInnerLink(bookTitle){
     location.href="/bookdetail?"+bookTitle
 }
 
