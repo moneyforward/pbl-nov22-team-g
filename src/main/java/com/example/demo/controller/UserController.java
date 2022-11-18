@@ -44,6 +44,11 @@ public class UserController {
     public boolean checkLogin(HttpSession session){
         return session.getAttribute("userid") != null;
     }
+    @RequestMapping("/getUserId")
+    @ResponseBody
+    public Integer getUserId(HttpSession session){
+        return Integer.parseInt(session.getAttribute("userid").toString())*42+414;
+    }
 
     @RequestMapping("/signup")
     public String signup(
