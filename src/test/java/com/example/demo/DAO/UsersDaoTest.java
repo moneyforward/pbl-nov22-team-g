@@ -50,14 +50,14 @@ public class UsersDaoTest {
 //        System.out.println(test);
 //        sqlSession.close();
 //    }
-//    @Test
-//    public void updataUser(){
-//        sqlSession = MybBatisUtils.getSqlSession();
-//        UsersDao mapper = sqlSession.getMapper(UsersDao.class);
-//        Users test = mapper.getUserbyId(1);
-//        test.setEmail("qqq@mf.com");
-//        mapper.updateUser(test);
-//        sqlSession.commit();
-//    }
+    @Test
+    public void updataUser(){
+        sqlSession = MybBatisUtils.getSqlSession();
+        UsersDao mapper = sqlSession.getMapper(UsersDao.class);
+        Users test = mapper.getUserbyEmail("333@mf.com");
+        test.setEmail("q123@mf.com");
+        mapper.updateUser(test);
+        sqlSession.commit();
+    }
 
 }

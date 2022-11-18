@@ -5,6 +5,7 @@ import com.example.demo.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,11 +53,31 @@ public class UserController {
             Model model, HttpServletRequest request){
         String status= usersService.userSignup(useremail,password,nickname);
         if(status == null){
-            request.getSession().setAttribute("User",nickname);
+//            request.getSession().setAttribute("User",nickname);
             return "user/login";
         }else{
             model.addAttribute("msg",status);
             return "user/signup";
         }
+    }
+    @RequestMapping("/profile")
+    public String userupdate(
+            @RequestParam("email") String useremail,
+            @RequestParam("password") String password,
+            @RequestParam("nickname") String nickname,
+            Model model, HttpServletRequest request
+    ){
+        HttpSession session=request.getSession(false);
+
+        int id = (int) session.getAttribute("userid");
+        String status = usersService.userUpdate(id,useremail,password,nickname);
+        if(status == null){
+            model.addAttribute("msg","The information has changed and needs to be logged again.");
+            return "user/login";
+        }else{
+            model.addAttribute("msg",status);
+            return"user/profile";
+        }
+
     }
 }
