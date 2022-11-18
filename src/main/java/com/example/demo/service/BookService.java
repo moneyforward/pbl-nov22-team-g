@@ -1,21 +1,20 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.BookDao;
+import com.example.demo.dao.UsersDao;
 import com.example.demo.pojo.Book;
 import com.example.demo.utils.MybBatisUtils;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class BookService {
-    SqlSession sqlSession;
+@Service
+public class BookService implements BookServiceInter{
+    @Autowired
+    private BookDao mapper;
+    @Override
     public Book findBookByTitle(String title){
-        Book result = null;
-        try {
-            sqlSession = MybBatisUtils.getSqlSession();
-            result = sqlSession.getMapper(Book.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            sqlSession.close();
-        }
-        return result;
+        Book book = mapper.findBookbyTitle("title");
+        return book;
     }
 }

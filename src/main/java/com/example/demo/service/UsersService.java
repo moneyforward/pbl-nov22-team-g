@@ -18,6 +18,7 @@ public class UsersService implements UserServiceInter{
     public String userLogin(String useremail, String password){
 
         Users user = mapper.getUserbyEmail(useremail);
+
         if(user.getPassword().equals(password)){
             return user.getNickname();
         }else{
