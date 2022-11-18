@@ -15,12 +15,12 @@ public class UsersService implements UserServiceInter{
     private UsersDao mapper;
 //    UsersDao mapper = sqlSession.getMapper(UsersDao.class);
     @Override
-    public String userLogin(String useremail, String password){
+    public Users userLogin(String useremail, String password){
 
         Users user = mapper.getUserbyEmail(useremail);
 
         if(user!=null && user.getPassword().equals(password)){
-            return user.getNickname();
+            return user;
         }else{
             return null;
         }
@@ -41,7 +41,5 @@ public class UsersService implements UserServiceInter{
         }else{
             return "Signup error";
         }
-
     }
-
 }
