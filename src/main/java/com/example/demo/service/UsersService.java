@@ -19,29 +19,11 @@ public class UsersService implements UserServiceInter{
 
         Users user = mapper.getUserbyEmail(useremail);
 
-        if(user!=null && user.getPassword().equals(password)){
+        if(user.getPassword().equals(password)){
             return user.getNickname();
         }else{
             return null;
         }
 
     }
-
-    @Override
-    public String userSignup(String useremail, String password, String nickname) {
-        if(mapper.getUserbyEmail("useremail")!=null){
-            return "Useremail had signup ";
-        }
-        if(mapper.getUserbyNickname("nickname")!= null){
-            return "Username had signup";
-        }
-
-        if(mapper.userRegister(useremail,nickname,password)){
-            return null;
-        }else{
-            return "Signup error";
-        }
-
-    }
-
 }
