@@ -42,7 +42,7 @@ function logOut(){
 
 function ifLogin(type){
     if(type==="user") {
-        let loginStatus;
+        let loginStatus = false;
         $.ajax({
             url:"/checkLogin",
             method:"post",
