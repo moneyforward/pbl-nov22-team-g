@@ -26,17 +26,46 @@ public class UsersService implements UserServiceInter{
         }
 
     }
+    @Override
+    public String userUpdate(int id,String email,String password, String nickname){
+        Users users= mapper.getUserbyID(id);
+        if(email != null){
+            if(mapper.getUserbyEmail(email)==null){
+                users.setEmail(email);
+            }else{
+                return "Email has been signup";
+            }
+
+        }
+        if(password != null){
+            users.setPassword(password);
+        }
+        if (nickname != null) {
+            if(mapper.getUserbyNickname(nickname)==null){
+                users.setNickname(nickname);
+            }else{
+                return "Nickname has been used";
+            }
+
+        }
+        if(mapper.updateUser(users)==1){
+            return null;
+        }else{
+            return "error";
+        }
+
+    }
 
     @Override
-    public String userSignup(String useremail, String password, String nickname) {
-        if(mapper.getUserbyEmail("useremail")!=null){
+    public String userSignup(String email, String password, String nickname) {
+        if(mapper.getUserbyEmail("email")!=null){
             return "Useremail had signup ";
         }
         if(mapper.getUserbyNickname("nickname")!= null){
             return "Username had signup";
         }
 
-        if(mapper.userRegister(useremail,nickname,password)){
+        if(mapper.userRegister(nickname,email,password)){
             return null;
         }else{
             return "Signup error";

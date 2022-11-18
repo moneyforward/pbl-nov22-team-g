@@ -18,6 +18,8 @@ public interface UsersDao {
     Users getUserbyEmail(String Email);
     @Select("select * from users where Nickname = #{Nickname}")
     Users getUserbyNickname(String Nickname);
+    @Select("select * from users where UserID = #{ID}")
+    Users getUserbyID(int ID);
     @Update("update Users set Nickname = #{Nickname},Password = #{Password},Email = #{Email} where UserID = #{UserID}")
     int updateUser(Users users);
     @Delete("delete from Users where UserID = #{UserID}")
