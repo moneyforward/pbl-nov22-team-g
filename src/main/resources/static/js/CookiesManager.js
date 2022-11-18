@@ -3,6 +3,11 @@ pkg: https://github.com/js-cookie/js-cookie
  */
 // import Cookies from "/js/libs/js.cookie.mjs"
 
+/* cookie required list
+username; userid; Overdue(user overdue status)
+adminid
+ */
+
 // use jquery coookie
 $(document).ready(function (){
     if($.cookie("username")!=null){
