@@ -28,4 +28,19 @@ public class UserController {
             return "user/login";
         }
     }
+    @RequestMapping("/signup")
+    public String signup(
+            @RequestParam("email") String useremail,
+            @RequestParam("password") String password,
+            @RequestParam("nickname") String nickname,
+            Model model, HttpServletRequest request){
+        String status= usersService.userSignup(useremail,password,nickname);
+        if(status == null){
+            request.getSession().setAttribute("User",nickname);
+            return "user/login";
+        }else{
+            model.addAttribute("msg",status);
+            return "user/signup";
+        }
+    }
 }
