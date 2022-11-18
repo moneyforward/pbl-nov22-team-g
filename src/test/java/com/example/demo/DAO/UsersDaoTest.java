@@ -31,8 +31,8 @@ public class UsersDaoTest {
     public void testinsert(){
         sqlSession = MybBatisUtils.getSqlSession();
         UsersDao mapper = sqlSession.getMapper(UsersDao.class);
-        Users test1 = new Users("abc","1234556","qyx@mf.com");
-        if(mapper.userRegister("abc","1234556","qyx@mf.com")){
+//        Users test1 = new Users("abc","1234556","qyx@mf.com");
+        if(mapper.userRegister("abcd","1234567","333@mf.com")){
             sqlSession.commit();
             System.out.println("Register ok!");
         }else{
