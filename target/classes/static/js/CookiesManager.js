@@ -3,6 +3,13 @@ pkg: https://github.com/js-cookie/js-cookie
  */
 // import Cookies from "/js/libs/js.cookie.mjs"
 
+/* cookie required list
+username;
+session required:
+adminid; userid; Overdue(user overdue status)
+
+ */
+
 // use jquery coookie
 $(document).ready(function (){
     if($.cookie("username")!=null){
@@ -26,16 +33,26 @@ $(document).ready(function (){
 })
 
 function logOut(){
-    $.removeCookie("userid")
     $.removeCookie("username")
+    $.ajax({
+        url: "/logout"
+    })
     location.href=""
 }
-$("#logout").onclick=logOut
 
 function ifLogin(type){
     if(type==="user") {
-        return $.cookie("userid") != null
+        let loginStatus;
+        $.ajax({
+            url:"/checkLogin",
+            method:"post",
+            async:false,
+            success: function (e){
+                loginStatus = e
+            }
+        })
+        return loginStatus
     }else{
-        return $.cookie("adminid") != null
+        return $.session.get("adminid") != null
     }
 }

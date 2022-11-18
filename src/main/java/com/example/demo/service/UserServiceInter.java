@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.pojo.Users;
+
 public interface UserServiceInter {
-    String userLogin(String useremail, String password);
+    Users userLogin(String useremail, String password);
     String userSignup(String useremail,String password,String nickname);
 }
