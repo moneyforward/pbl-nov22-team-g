@@ -11,8 +11,8 @@ public class AdminService implements AdminServiceInter{
     @Autowired
     private AdminDao mapper;
     @Override
-    public Admin adminLogin(String nickname, String password){
-        Admin admin = mapper.getAdminbyNickname("nickname");
+    public Admin adminLogin(String email, String password){
+        Admin admin = mapper.getAdminbyEmail(email);
 
         if(admin!=null && admin.getPassword().equals(password)){
             return admin;
@@ -22,8 +22,8 @@ public class AdminService implements AdminServiceInter{
     }
 
     @Override
-    public Boolean addAdmin(String Nickname, String Password) {
-        Admin admin = new Admin(Nickname,Password);
+    public Boolean addAdmin(String email, String Password) {
+        Admin admin = new Admin(email,Password);
         return mapper.adminRegister(admin);
     }
 }

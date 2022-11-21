@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 public class Admin {
     private String AdminID;
-    private String Nickname;
+    private String Email;
     private String Password;
 
-    public Admin(String nickname, String password) {
-        Nickname = nickname;
+    public Admin(String email, String password) {
+        Email = email;
         Password = password;
     }
 }

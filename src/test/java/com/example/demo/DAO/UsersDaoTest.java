@@ -65,7 +65,7 @@ public class UsersDaoTest {
     public void addAdmin(){
         sqlSession = MybBatisUtils.getSqlSession();
         AdminDao mapper = sqlSession.getMapper(AdminDao.class);
-        Admin admin = mapper.getAdminbyNickname("admin");
+        Admin admin = mapper.getAdminbyEmail("admin@mf.com");
         System.out.println(admin);
     }
 }

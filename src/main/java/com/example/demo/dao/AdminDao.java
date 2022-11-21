@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface AdminDao {
-    @Select("select * from admin where Nickname = #{Nickname}")
-    Admin getAdminbyNickname(String Nickname);
-    @Insert("insert INTO admin(Nickname,Password) values(#{admin},#{Password})")
+    @Select("select * from admin where Email = #{Email}")
+    Admin getAdminbyEmail(String Email);
+    @Insert("insert INTO admin(Email,Password) values(#{Email},#{Password})")
     boolean adminRegister(Admin admin);
 }

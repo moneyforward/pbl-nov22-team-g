@@ -26,17 +26,18 @@ public class AdminController {
     private BookService bookService;
     @RequestMapping("/admin")
     public String login(
-            @RequestParam("nickname") String nickname,
+            @RequestParam("email") String email,
             @RequestParam("password") String password,
             Model model, HttpServletRequest request, HttpServletResponse response) {
-        Admin admin = adminService.adminLogin(nickname,password);
+        Admin admin = adminService.adminLogin(email,password);
+        System.out.println(admin);
         if(admin !=null){
             request.getSession().setAttribute("adminid", admin.getAdminID());
-            Cookie usernameCookie = new Cookie("adminname", admin.getNickname());
+            Cookie usernameCookie = new Cookie("Email", admin.getEmail());
             response.addCookie(usernameCookie);
-            return "console";
+            return "admin/console";
         }else{
-            model.addAttribute("msg","Wrong password or nickname not registered.");
+            model.addAttribute("msg","Wrong password or email not registered.");
             return "admin/login";
         }
     }
@@ -52,10 +53,10 @@ public class AdminController {
                           @RequestParam("ISBN") String ISBN,
                           Model model){
         if(bookService.addnewBook(title, author, ISBN)){
-            return "/admin/booklist";
+            return "admin/booklist";
         }else{
             model.addAttribute("msg","Add new book error");
-            return "/admin/addbook";
+            return "admin/addbook";
         }
 
     }
@@ -68,23 +69,23 @@ public class AdminController {
                            @RequestParam("ISBN") String ISBN,
                            Model model){
         if(bookService.addnewBook(title, author, ISBN)){
-            return "/admin/booklist";
+            return "admin/booklist";
         }else{
             model.addAttribute("msg","Add new book error");
-            return "/admin/addbook";
+            return "admin/addbook";
         }
 
     }
     @RequestMapping("/admin/addAdmin")
-    public String addAdmin(@RequestParam("nickname")String nickname,
+    public String addAdmin(@RequestParam("email")String email,
                            @RequestParam("password") String password,
                            Model model){
-        if(adminService.addAdmin(nickname,password)){
+        if(adminService.addAdmin(email,password)){
             model.addAttribute("msg","add success!");
         }else{
             model.addAttribute("msg","error!");
         }
-        return "/admin/addAdmin";
+        return "admin/addAdmin";
 
     }
 
