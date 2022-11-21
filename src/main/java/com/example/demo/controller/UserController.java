@@ -31,6 +31,7 @@ public class UserController {
             // need overdue status for session & cookie
 
             Cookie usernameCookie = new Cookie("username", userInfo.getNickname());
+            usernameCookie.setMaxAge(120);
             response.addCookie(usernameCookie);
             return "index";
         }else{

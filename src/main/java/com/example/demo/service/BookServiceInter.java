@@ -9,4 +9,5 @@ public interface BookServiceInter {
     Book findBookByTitle(String title);
 
     List<BookList> getBookList();
+    List<Book> getBookDetail(String title);
 }

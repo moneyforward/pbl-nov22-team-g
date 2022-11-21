@@ -21,4 +21,6 @@ public interface BookDao {
     boolean addBook(Book newbook);
     @Delete("delete from libsystem.Book where BookID = #{BookID}")
     boolean deletBook(int BookID);
+    @Select("SELECT book.bookid, title, author, status, count(*) FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
+    List<Book> getBookDetailByTitle(String title);
 }

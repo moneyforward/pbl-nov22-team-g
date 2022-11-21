@@ -21,6 +21,11 @@ public class BookService implements BookServiceInter{
     }
 
     @Override
+    public List<Book> getBookDetail(String title){
+        return mapper.getBookDetailByTitle(title);
+    }
+
+    @Override
     public List<BookList> getBookList(){
         return mapper.getBookList();
     }
