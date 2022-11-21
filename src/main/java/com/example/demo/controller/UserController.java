@@ -31,6 +31,7 @@ public class UserController {
             // need overdue status for session & cookie
 
             Cookie usernameCookie = new Cookie("username", userInfo.getNickname());
+            usernameCookie.setMaxAge(120);
             response.addCookie(usernameCookie);
             return "index";
         }else{
@@ -43,6 +44,11 @@ public class UserController {
     @ResponseBody
     public boolean checkLogin(HttpSession session){
         return session.getAttribute("userid") != null;
+    }
+    @RequestMapping("/getUserId")
+    @ResponseBody
+    public Integer getUserId(HttpSession session){
+        return Integer.parseInt(session.getAttribute("userid").toString())*42+414;
     }
 
     @RequestMapping("/signup")

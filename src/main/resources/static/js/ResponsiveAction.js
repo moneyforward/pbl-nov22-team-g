@@ -13,7 +13,7 @@ function editEmail(){
 }
 
 function tableInnerLink(bookTitle){
-    location.href="/bookdetail?"+bookTitle
+    location.href="/bookdetail?title="+bookTitle
 }
 
 function checkPassValid(){
