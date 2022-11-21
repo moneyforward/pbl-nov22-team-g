@@ -12,7 +12,7 @@ public class Book {
     private String Author;
     private String status;
     private Integer statusCount;
-    private String isbn;
+    private String ISBN;
 
     // private String ISBN;
     public Book(int BookID, String Title, String Author, String status, Integer statusCount, String ISBN){
@@ -21,7 +21,12 @@ public class Book {
         this.Author = Author;
         this.status = status;
         this.statusCount = statusCount;
-        this.isbn = ISBN;
+        this.ISBN = ISBN;
+    }
+    public Book(String Title, String Author, String ISBN){
+        this.Title = Title;
+        this.Author = Author;
+        this.ISBN =ISBN;
     }
 
     public HashMap<String, String> buildPublicInfo(){

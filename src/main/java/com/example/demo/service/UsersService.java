@@ -65,7 +65,7 @@ public class UsersService implements UserServiceInter{
             return "Username had signup";
         }
 
-        if(mapper.userRegister(nickname,email,password)){
+        if(mapper.userRegister(nickname,password,email)){
             return null;
         }else{
             return "Signup error";

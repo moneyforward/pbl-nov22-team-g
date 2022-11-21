@@ -16,4 +16,6 @@ public interface BookServiceInter {
     List<Book> getReadPlan(int userId);
     void deletePlan(String title, int userId);
     List<BorrowDetails> getRecord(String[] status,int userId);
+    boolean addnewBook(String title,String author,String ISBN);
+    boolean editBook(int BookID, String title,String author,String ISBN);
 }

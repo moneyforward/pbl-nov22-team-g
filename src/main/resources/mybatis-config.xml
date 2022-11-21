@@ -21,7 +21,7 @@
 
     <mappers>
         <mapper resource="com/example/demo/dao/UsersMapper.xml"/>
-<!--        <mapper resource="com/example/demo/dao/AdminMapper.xml"/>-->
+        <mapper resource="com/example/demo/dao/AdminMapper.xml"/>
         <mapper resource="com/example/demo/dao/BookMapper.xml"/>
     </mappers>
 
