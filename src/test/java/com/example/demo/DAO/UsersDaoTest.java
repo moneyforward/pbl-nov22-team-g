@@ -1,6 +1,8 @@
 package com.example.demo.DAO;
 
+import com.example.demo.dao.AdminDao;
 import com.example.demo.dao.UsersDao;
+import com.example.demo.pojo.Admin;
 import com.example.demo.pojo.Users;
 import com.example.demo.utils.MybBatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -59,5 +61,11 @@ public class UsersDaoTest {
         mapper.updateUser(test);
         sqlSession.commit();
     }
-
+    @Test
+    public void addAdmin(){
+        sqlSession = MybBatisUtils.getSqlSession();
+        AdminDao mapper = sqlSession.getMapper(AdminDao.class);
+        Admin admin = mapper.getAdminbyNickname("admin");
+        System.out.println(admin);
+    }
 }

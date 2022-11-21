@@ -9,8 +9,7 @@ public class Admin {
     private String Nickname;
     private String Password;
 
-    public Admin(String adminID, String nickname, String password) {
-        AdminID = adminID;
+    public Admin(String nickname, String password) {
         Nickname = nickname;
         Password = password;
     }

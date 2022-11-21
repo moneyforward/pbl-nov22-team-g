@@ -24,4 +24,20 @@ public class BookService implements BookServiceInter{
     public List<BookList> getBookList(){
         return mapper.getBookList();
     }
+
+    @Override
+    public boolean addnewBook(String title, String author, String ISBN) {
+
+        return mapper.addBook(new Book(title,author,ISBN));
+    }
+
+    @Override
+    public boolean editBook(int BookID,String title, String author, String ISBN) {
+
+        Book book = mapper.findBookbyID(BookID);
+        book.setAuthor(author);
+        book.setISBN(ISBN);
+        book.setTitle(title);
+        return mapper.updateUser(book);
+    }
 }

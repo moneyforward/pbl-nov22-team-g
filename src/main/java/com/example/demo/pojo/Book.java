@@ -17,6 +17,11 @@ public class Book {
         this.ISBN = ISBN;
 //        this.Status = Status;
     }
+    public Book(String Title, String Author, String ISBN){
+        this.Title = Title;
+        this.Author = Author;
+        this.ISBN =ISBN;
+    }
 
     @Override
     public String toString() {

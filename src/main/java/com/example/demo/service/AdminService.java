@@ -21,4 +21,9 @@ public class AdminService implements AdminServiceInter{
         }
     }
 
+    @Override
+    public Boolean addAdmin(String Nickname, String Password) {
+        Admin admin = new Admin(Nickname,Password);
+        return mapper.adminRegister(admin);
+    }
 }
