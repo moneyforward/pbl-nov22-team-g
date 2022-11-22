@@ -46,7 +46,6 @@ function getInProgress(){
         type:"post",
         async: false,
         success: function (list){
-            console.log(list)
             let recordHtml = ''
             $.each(list, function (i, record){
                 recordHtml += '<tr class="table-primary">' +

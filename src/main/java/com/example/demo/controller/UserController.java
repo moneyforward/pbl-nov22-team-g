@@ -78,7 +78,7 @@ public class UserController {
         Users users = usersService.getUserPofile(id);
         model.addAttribute("email",users.getEmail());
         model.addAttribute("nickname",users.getNickname());
-        return null;
+        return "user/profile";
     }
     @RequestMapping("/profile")
     public String userupdate(
