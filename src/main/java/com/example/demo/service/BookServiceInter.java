@@ -20,4 +20,6 @@ public interface BookServiceInter {
     boolean editBook(int BookID, String title,String author,String ISBN);
     List<BorrowDetails> findoverdueBook(String status);
     String checkstatus(int userID);
+    boolean returnBook(int BookID,int UserUD);
+
 }

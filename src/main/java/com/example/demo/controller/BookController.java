@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -92,5 +93,12 @@ public class BookController {
     @ResponseBody
     public List<BorrowDetails> getHistory(HttpSession session){
         return bookService.getRecord(new String[]{"done"}, Integer.parseInt(session.getAttribute("userid").toString()));
+    }
+    @RequestMapping("/returnbook")
+    public boolean returnBook(@RequestParam("bookid")int bookid,
+                             HttpSession session){
+        return bookService.returnBook(bookid,Integer.parseInt(session.getAttribute("userid").toString()));
+
+
     }
 }

@@ -78,4 +78,10 @@ public class BookService implements BookServiceInter{
     public List<BorrowDetails> findoverdueBook(String status) {
         return mapper.getoverdueBook(status);
     }
+
+    @Override
+    public boolean returnBook(int BookID, int UserID) {
+//        BorrowDetails borrowDetails =mapper.findbookDetails(BookID,UserID);
+        return mapper.updatebookDetails("done",UserID,BookID);
+    }
 }

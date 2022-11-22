@@ -31,6 +31,10 @@ public interface BookDao {
     void addReadPlan(String title, int userId);
     @Insert("INSERT INTO borrow(StartDate, EndDate, Status, BookID, UserID) VALUES(NOW(), DATE_ADD(NOW(), INTERVAL 24 HOUR), 'pending', #{bookId}, #{userId})")
     void reverseBook(int bookId, int userId);
+    @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
+    BorrowDetails findbookDetails(int bookid, int userid);
+    @Update("update borrow set status = #{status} where UserID = #{userID} AND BookID = #{bookID}")
+    boolean updatebookDetails(String status,int userID,int bookID);
 
     @Select("""
             SELECT ifnull(avail.bookid,0), plans.booktitle, avail.author, avail.status, ifnull(avail.statusCount, 0), isbn FROM
