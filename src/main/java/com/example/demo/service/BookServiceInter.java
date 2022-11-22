@@ -22,6 +22,7 @@ public interface BookServiceInter {
     List<BookList> searchSingleBook(String query);
     List<BorrowDetails> findoverdueBook(String status);
     String checkstatus(int userID);
-    boolean returnBook(int BookID,int UserUD);
+    boolean returnBook(int BookID);
+
 
 }

@@ -17,7 +17,7 @@ public interface BookDao {
     Book findBookbyTitle(String title);
     @Select("select * from libsystem.Book where Author = #{Author}")
     Book findBookbyAuthor(String Author);
-    @Select("select * from libsystem.Book where BookID = #{BookID}")
+    @Select("select * from book where BookID = #{BookID}")
     Book findBookbyID(int BookID);
     @Insert("insert INTO libsystem.Book(Title,Author,ISBN) values(#{Title},#{Author},#{ISBN})")
     boolean addBook(Book newbook);
@@ -33,8 +33,8 @@ public interface BookDao {
     void reverseBook(int bookId, int userId);
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
-    @Update("update borrow set status = #{status} where UserID = #{userID} AND BookID = #{bookID}")
-    boolean updatebookDetails(String status,int userID,int bookID);
+    @Update("update borrow set status = #{status} where BookID = #{bookID} AND status='processing'")
+    boolean updatebookDetails(String status,int bookID);
 
     @Select("""
             SELECT ifnull(avail.bookid,0), plans.booktitle, avail.author, avail.status, ifnull(avail.statusCount, 0), isbn FROM
@@ -68,7 +68,7 @@ public interface BookDao {
             """)
     List<BookList> searchBook(String query);
     @Select("""
-            select title, author, count(*) stock, isbn from book
+            select title, author, 1, isbn from book
             WHERE title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%')
             
             """)

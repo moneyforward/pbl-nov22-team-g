@@ -62,6 +62,7 @@ public class AdminController {
     }
     //need a button to change the book details.
     @RequestMapping("/admin/searchsinglebook")
+    @ResponseBody
     public List<BookList> searchsingleBook(@RequestParam("query")String query){
         return bookService.searchSingleBook(query);
     }

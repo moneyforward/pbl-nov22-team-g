@@ -14,12 +14,12 @@ function searchUser(query){
     })
 }
 
-function renderDetail(title){
+function renderDetail(bid){
     $.ajax({
-        url: "/bookDetail",
+        url: "/returnBook",
         type: "post",
         async:false,
-        data:{title:title},
+        data:{bookid:bid},
         success: function (detail) {
             $("#bookConsole").html('<form action="/admin/editBook">'+
                 '<div class="form-group">' +
@@ -46,7 +46,7 @@ function renderBlank(){
         '<div class="form-group">' +
         '<label class="col-form-label mt-4" for="inputDefault2">ISBN</label>' +
         '<input type="text" name="ISBN" class="form-control" placeholder="Enter the ISBN" id="inputDefault2"></div>'+
-        '<button type="submit" class="btn btn primary btn-lg">Submit</button></form>')
+        '<button type="submit" class="btn btn-primary btn-lg">Submit</button></form>')
 }
 
 function searchBook(query){

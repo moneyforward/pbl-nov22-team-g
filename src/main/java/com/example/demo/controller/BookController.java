@@ -4,6 +4,7 @@ import com.example.demo.pojo.Book;
 import com.example.demo.pojo.BookList;
 import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.service.BookService;
+import com.example.demo.service.SuperusersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -73,7 +74,7 @@ public class BookController {
         }
         String status = bookService.checkstatus(Integer.parseInt(session.getAttribute("userid").toString()));
         if(status != null){
-            model.addAttribute("msg",model);
+            model.addAttribute("msg", status);
             return false;
         }
         if(bookId != -1) {
@@ -97,14 +98,19 @@ public class BookController {
     @RequestMapping("/returnbook")
     public boolean returnBook(@RequestParam("bookid")int bookid,
                              HttpSession session){
-        return bookService.returnBook(bookid,Integer.parseInt(session.getAttribute("userid").toString()));
-
-
+        return bookService.returnBook(bookid);
     }
 
     @RequestMapping("/searchBook")
     @ResponseBody
     public List<BookList> searchBook(@RequestParam("query") String query){
         return bookService.searchBook(query);
+    }
+
+    @RequestMapping("/readUserQRCode")
+    @ResponseBody
+    public List<BorrowDetails> readUserQRCode(String userCode){
+        int userid = (Integer.parseInt(userCode)-414)/42;
+        return bookService.getRecord(new String[]{"pending"}, userid);
     }
 }

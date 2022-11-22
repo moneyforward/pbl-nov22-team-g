@@ -50,8 +50,8 @@ public class UserController {
     }
     @RequestMapping("/getUserId")
     @ResponseBody
-    public Integer getUserId(HttpSession session){
-        return Integer.parseInt(session.getAttribute("userid").toString())*42+414;
+    public String getUserId(HttpSession session){
+        return "u"+(Integer.parseInt(session.getAttribute("userid").toString())*42+414);
     }
 
     @RequestMapping("/signup")
@@ -102,6 +102,5 @@ public class UserController {
             model.addAttribute("msg",status);
             return"user/profile";
         }
-
     }
 }

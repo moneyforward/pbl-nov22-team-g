@@ -108,7 +108,7 @@ public class BookService implements BookServiceInter{
         if(count >10){
             return "check out books up to 10 !";
         }
-        if(mapper.getRecord(new String[]{"overdue"},userID)!=null){
+        if(mapper.getRecord(new String[]{"overdue"},userID).size() != 0){
             return "You have to return the overdue book first!";
         }
         return null;
@@ -126,9 +126,9 @@ public class BookService implements BookServiceInter{
     }
 
     @Override
-    public boolean returnBook(int BookID, int UserID) {
+    public boolean returnBook(int BookID) {
 //        BorrowDetails borrowDetails =mapper.findbookDetails(BookID,UserID);
-        return mapper.updatebookDetails("done",UserID,BookID);
+        return mapper.updatebookDetails("done",BookID);
     }
 
 }
