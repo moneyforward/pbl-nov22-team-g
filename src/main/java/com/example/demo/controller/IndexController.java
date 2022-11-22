@@ -25,10 +25,10 @@ public class IndexController {
         return "user/signup";
     }
 
-    @GetMapping("/profile")
-    public String profile() {
-        return "user/profile";
-    }
+//    @GetMapping("/profile")
+//    public String profile() {
+//        return "user/profile";
+//    }
 
     @GetMapping("/booklist")
     public String bookList() {
