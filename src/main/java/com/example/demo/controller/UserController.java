@@ -5,10 +5,7 @@ import com.example.demo.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -71,6 +68,18 @@ public class UserController {
             return "user/signup";
         }
     }
+    @GetMapping("/profile")
+    public String getProfile(Model model,HttpServletRequest request){
+        HttpSession session=request.getSession(false);
+        if(session == null){
+            return "user/login";
+        }
+        int id = (int) session.getAttribute("userid");
+        Users users = usersService.getUserPofile(id);
+        model.addAttribute("email",users.getEmail());
+        model.addAttribute("nickname",users.getNickname());
+        return null;
+    }
     @RequestMapping("/profile")
     public String userupdate(
             @RequestParam("email") String useremail,
@@ -79,7 +88,9 @@ public class UserController {
             Model model, HttpServletRequest request
     ){
         HttpSession session=request.getSession(false);
-
+        if(session == null){
+            return "user/login";
+        }
         int id = (int) session.getAttribute("userid");
         String status = usersService.userUpdate(id,useremail,password,nickname);
         if(status == null){

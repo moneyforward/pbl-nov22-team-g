@@ -56,6 +56,7 @@ public class UsersService implements UserServiceInter{
 
     }
 
+
     @Override
     public String userSignup(String email, String password, String nickname) {
         if(mapper.getUserbyEmail("email")!=null){
@@ -70,5 +71,10 @@ public class UsersService implements UserServiceInter{
         }else{
             return "Signup error";
         }
+    }
+
+    @Override
+    public Users getUserPofile(int ID) {
+        return mapper.getUserbyID(ID);
     }
 }
