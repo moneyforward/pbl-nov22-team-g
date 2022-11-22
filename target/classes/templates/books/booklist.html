@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Books</title>
+  <!-- public component -->
+  <link rel="icon" href="/saltedfish.png">
+  <link rel="stylesheet" href="/bootstrap.min.css">
+  <link rel="stylesheet" href="/customize.css">
+  <script type="text/javascript" src="/js/libs/jquery-3.6.1.min.js"></script>
+  <!--  <script type="module" src="/js/CookiesManager.js"></script>-->
+  <script type="text/javascript" src="/js/libs/jquery.cookie-1.4.1.min.js"></script>
+  <script type="text/javascript" src="/js/CookiesManager.js"></script>
+  <script type="text/javascript" src="/js/ResponsiveAction.js"></script>
+  <script type="text/javascript" src="/js/BookScript.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/index">Salted Fish Library</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02"
+              aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation"
+              onclick="showSideList()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Library
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+               href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="showDropdown('1')">Services</a>
+            <div class="dropdown-menu" id="dropdown1">
+              <a class="dropdown-item" href="#">Read plans</a>
+              <a class="dropdown-item" href="#">Borrow List</a>
+              <a class="dropdown-item" href="#">Wish List</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Guidance</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>&nbsp;&nbsp;&nbsp;&nbsp;
+          <li>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" id="username"
+               href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="showDropdown('2')">username</a>
+            <div class="dropdown-menu" id="dropdown2">
+              <a class="dropdown-item" href="/profile">Profile</a>
+              <a class="dropdown-item" th:href="@{/profile#t_5}">ID QRcode</a>
+              <a class="dropdown-item" href="#">Setting</a>
+            </div>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Search" id="queryText0">
+          <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="searchHerf($('#queryText0').val())">Search</button>
+        </form>
+        <a href="/login" id="login-btn" class="nav-link active">
+          <input type="button" value="Log in" class="btn btn-primary">
+        </a>
+        <input type="button" value="Log out" class="btn btn-primary" id="logout" onclick="logOut()">
+      </div>
+    </div>
+  </nav>
+
+  <div style="padding:1rem">
+  <form class="d-flex" action="/searchBook">
+    <input class="form-control me-sm-2" id="queryText1" type="text" placeholder="Type any keywords">
+    <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="getSearch($('#queryText1').val())">Search</button>
+  </form>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Stock</th>
+    </tr>
+    </thead>
+    <tbody id="bookListBody">
+    <tr class="table-primary" onclick="tableInnerLink('@title')">
+      <th scope="row">render</th><td>render</td><td>render</td>
+    </tr>
+    </tbody>
+  </table>
+    <div id="pagebar"></div>
+    <div class="form-group" style="max-width: 5rem">
+      <label for="exampleSelect1" class="form-label mt-4">Row per page</label>
+      <select class="form-select" id="exampleSelect1" onchange="changeShownRow(this.value)">
+        <option>10</option>
+        <option>20</option>
+        <option>50</option>
+      </select>
+    </div>
+  </div>
+</body>
+</html>
