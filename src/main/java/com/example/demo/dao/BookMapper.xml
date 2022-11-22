@@ -5,7 +5,7 @@
 <!--namespace=绑定一个对应的Dao/Mapper接口-->
 <mapper namespace="com.example.demo.dao.BookDao">
 
-    <select id="findBook" parameterType="String" resultType="com.example.demo.pojo.Book">
+    <select id="findBook" parameterType="String" resultType="com.example.demo.pojo.BookDetail">
         select * from libsystem.Book where Title= #{title}
     </select>
 

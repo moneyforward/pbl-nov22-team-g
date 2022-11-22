@@ -1,9 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.Admin;
-import com.example.demo.pojo.BookList;
-import com.example.demo.pojo.BorrowDetails;
-import com.example.demo.pojo.Users;
+import com.example.demo.pojo.*;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +29,9 @@ public class AdminController {
             @RequestParam("email") String email,
             @RequestParam("password") String password,
             Model model, HttpServletRequest request, HttpServletResponse response) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String encodepassword = bCryptPasswordEncoder.encode(password);
-        Admin admin = adminService.adminLogin(email,encodepassword);
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String encodepassword = bCryptPasswordEncoder.encode(password);
+        Admin admin = adminService.adminLogin(email,password);
         System.out.println(admin);
         if(admin !=null){
             request.getSession().setAttribute("adminid", admin.getAdminID());
@@ -65,6 +62,10 @@ public class AdminController {
     @ResponseBody
     public List<BookList> searchsingleBook(@RequestParam("query")String query){
         return bookService.searchSingleBook(query);
+    }
+    @RequestMapping("/admin/findbookbyID")
+    public Book findbookbyID(@RequestParam("BookID") int bookID){
+        return bookService.findbookbyID(bookID);
     }
     @RequestMapping("/admin/editbook")
     public String editBook(@RequestParam("title")String title,

@@ -1,10 +1,9 @@
 package com.example.demo.dao;
 
 import com.example.demo.pojo.Book;
+import com.example.demo.pojo.BookDetail;
 import com.example.demo.pojo.BookList;
 import com.example.demo.pojo.BorrowDetails;
-import org.apache.ibatis.annotations.*;
-import com.example.demo.pojo.Users;
 import org.apache.ibatis.annotations.*;
 
 
@@ -18,15 +17,16 @@ public interface BookDao {
     @Select("select * from libsystem.Book where Author = #{Author}")
     Book findBookbyAuthor(String Author);
     @Select("select * from book where BookID = #{BookID}")
+
     Book findBookbyID(int BookID);
-    @Insert("insert INTO libsystem.Book(Title,Author,ISBN) values(#{Title},#{Author},#{ISBN})")
+    @Insert("insert INTO Book(Title,Author,ISBN) values(#{Title},#{Author},#{ISBN})")
     boolean addBook(Book newbook);
-    @Update("update book set Title = #{title},Author = #{author},ISBN = #{ISBN} where Title = #{BookID}")
-    boolean updateUser(Book book);
+    @Update("update Book set Title = #{title},Author = #{author},ISBN = #{ISBN} where Title = #{BookID}")
+    boolean updateUser(Book bookDetail);
     @Delete("delete from libsystem.Book where BookID = #{BookID}")
     boolean deletBook(int BookID);
-    @Select("SELECT book.bookid, title, author, status, count(*),isbn FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
-    List<Book> getBookDetailByTitle(String title);
+    @Select("SELECT Book.bookid, title, author, status, count(*),isbn FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
+    List<BookDetail> getBookDetailByTitle(String title);
     @Insert("INSERT INTO plans(bookTitle, userId) values(#{title}, #{userId})")
     void addReadPlan(String title, int userId);
     @Insert("INSERT INTO borrow(StartDate, EndDate, Status, BookID, UserID) VALUES(NOW(), DATE_ADD(NOW(), INTERVAL 24 HOUR), 'pending', #{bookId}, #{userId})")
@@ -43,7 +43,7 @@ public interface BookDao {
             WHERE book.title IN (SELECT booktitle FROM plans WHERE userid=#{userId}) AND (status is null) GROUP BY status) avail
             RIGHT JOIN plans ON avail.title=plans.bookTitle
             """)
-    List<Book> getReadPlan(int userId);
+    List<BookDetail> getReadPlan(int userId);
 
     @Delete("DELETE FROM plans WHERE booktitle=#{title} AND userid=#{userId})")
     void deletePlan(String title, int userId);
@@ -81,7 +81,7 @@ public interface BookDao {
             AND borrow.userid=#{userId} AND (book.title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%'))
             </script>
             """)
-    List<Book> searchRecord(@Param("list") String[] status, String query, int userId);
+    List<BookDetail> searchRecord(@Param("list") String[] status, String query, int userId);
     
     @Select("select * from borrow where Status ={status}")
     List<BorrowDetails> getoverdueBook(String status);

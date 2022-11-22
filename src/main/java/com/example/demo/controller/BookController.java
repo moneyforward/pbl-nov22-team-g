@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.Book;
+import com.example.demo.pojo.BookDetail;
 import com.example.demo.pojo.BookList;
 import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.service.BookService;
@@ -11,12 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 
 @Controller
 public class BookController {
@@ -32,13 +30,13 @@ public class BookController {
     @RequestMapping("/bookDetail")
     @ResponseBody
     public HashMap<String, String> getBook(String title){
-        List<Book> bookStatus = bookService.getBookDetail(title);
+        List<BookDetail> bookDetailStatuses = bookService.getBookDetail(title);
 
-        HashMap<String, String> bookDetails = bookStatus.get(0).buildPublicInfo();
-        for(Book book: bookStatus){
-            String status =book.getStatus() != null? book.getStatus():"avail";
+        HashMap<String, String> bookDetails = bookDetailStatuses.get(0).buildPublicInfo();
+        for(BookDetail bookDetail : bookDetailStatuses){
+            String status = bookDetail.getStatus() != null? bookDetail.getStatus():"avail";
 
-            bookDetails.put(status, book.getStatusCount()+"");
+            bookDetails.put(status, bookDetail.getStatusCount()+"");
         }
 
         return bookDetails;
@@ -52,7 +50,7 @@ public class BookController {
     }
     @RequestMapping("/getReadPlans")
     @ResponseBody
-    public List<Book> getReadPlan(HttpSession session){
+    public List<BookDetail> getReadPlan(HttpSession session){
         return bookService.getReadPlan(Integer.parseInt(session.getAttribute("userid").toString()));
     }
     @RequestMapping("/deleteReadPlan")
@@ -65,11 +63,11 @@ public class BookController {
     @RequestMapping("/reserveBook")
     @ResponseBody
     public boolean reserveBook(String title, HttpSession session, Model model){
-        List<Book> bookStatus = bookService.getBookDetail(title);
+        List<BookDetail> bookDetailStatuses = bookService.getBookDetail(title);
         int bookId = -1;
-        for(Book book:bookStatus){
-            if(book.getStatus()!=null) continue;
-            bookId = book.getBookID();
+        for(BookDetail bookDetail : bookDetailStatuses){
+            if(bookDetail.getStatus()!=null) continue;
+            bookId = bookDetail.getBookID();
             break;
         }
         String status = bookService.checkstatus(Integer.parseInt(session.getAttribute("userid").toString()));
