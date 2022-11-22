@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 //public record Book(String BookID,String Title, String Author,String ISBN){};
 @Data
-public class Book {
+public class BookDetail {
     private int BookID;
     private String Title;
     private String Author;
@@ -15,7 +15,7 @@ public class Book {
     private String ISBN;
 
     // private String ISBN;
-    public Book(int BookID, String Title, String Author, String status, Integer statusCount, String ISBN){
+    public BookDetail(int BookID, String Title, String Author, String status, Integer statusCount, String ISBN){
         this.BookID = BookID;
         this.Title = Title;
         this.Author = Author;
@@ -23,7 +23,7 @@ public class Book {
         this.statusCount = statusCount;
         this.ISBN = ISBN;
     }
-    public Book(String Title, String Author, String ISBN){
+    public BookDetail(String Title, String Author, String ISBN){
         this.Title = Title;
         this.Author = Author;
         this.ISBN =ISBN;

@@ -65,6 +65,10 @@ public class AdminController {
     public List<BookList> searchsingleBook(@RequestParam("query")String query){
         return bookService.searchSingleBook(query);
     }
+    @RequestMapping("/admin/findbookbyID")
+    public BookList findbookbyID(@RequestParam("BookID") String bookID){
+        return null;
+    }
     @RequestMapping("/admin/editbook")
     public String editBook(@RequestParam("title")String title,
                            @RequestParam("author") String author,
