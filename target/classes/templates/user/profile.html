@@ -15,7 +15,6 @@
   <script type="text/javascript" src="/js/ResponsiveAction.js"></script>
   <script type="text/javascript" src="/js/libs/jquery.qrcode.min.js"></script>
   <script type="text/javascript" src="/js/QRcoder.js"></script>
-  <script type="text/javascript" src="/js/ProfileScript.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -115,14 +114,14 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Title</th><th scope="col">Available</th>
-          <th>reserve button</th><th>delete button</th>
+          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Stock</th><th scope="col">Available</th>
+          <th>reserve button</th>
         </tr>
         </thead>
-        <tbody id="planBody">
-        <tr class="table-primary"><td>render</td><td>render</td>
-          <td><button class="btn btn-info btn-sm">Reserve</button></td>
-          <td><button class="btn btn-danger btn-sm">Delete</button></td>
+        <tbody>
+        <tr class="table-primary">
+          <th scope="row">render</th><td>render</td><td>render</td><td>render</td>
+          <td>render <button class="btn btn-secondary btn-sm">Reserve</button></td>
         </tr>
         </tbody>
       </table>
@@ -131,10 +130,10 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">StartDate</th><th scope="col">Deadline</th><th scope="col">Status</th>
+          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Deadline</th><th scope="col">Status</th>
         </tr>
         </thead>
-        <tbody id="inProgressBody">
+        <tbody>
         <tr class="table-primary">
           <th scope="row">render</th><td>render</td><td>render</td><td>render</td>
         </tr>
@@ -150,10 +149,10 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">StartDate</th><th scope="col">EndDate</th>
+          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Date</th><th scope="col">Status</th>
         </tr>
         </thead>
-        <tbody id="historyBody">
+        <tbody>
         <tr class="table-primary">
           <th scope="row">render</th><td>render</td><td>render</td>
         </tr>
