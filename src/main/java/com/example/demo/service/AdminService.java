@@ -4,6 +4,7 @@ import com.example.demo.dao.AdminDao;
 import com.example.demo.pojo.Admin;
 import com.example.demo.pojo.Users;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,8 +14,8 @@ public class AdminService implements AdminServiceInter{
     @Override
     public Admin adminLogin(String email, String password){
         Admin admin = mapper.getAdminbyEmail(email);
-
-        if(admin!=null && admin.getPassword().equals(password)){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        if(admin!=null && bCryptPasswordEncoder.matches(password,admin.getPassword())){
             return admin;
         }else{
             return null;
