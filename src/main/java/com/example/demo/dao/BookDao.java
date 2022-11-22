@@ -68,6 +68,12 @@ public interface BookDao {
             """)
     List<BookList> searchBook(String query);
     @Select("""
+            select title, author, count(*) stock, isbn from book
+            WHERE title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%')
+            
+            """)
+    List<BookList> searchSingleBook(String query);
+    @Select("""
             <script>
             SELECT borrow.recordid, borrow.startdate, borrow.enddate, borrow.status, borrow.userid, borrow.bookid, book.title, book.author
             FROM borrow LEFT JOIN book ON borrow.bookid=book.bookid WHERE borrow.status IN

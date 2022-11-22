@@ -52,13 +52,13 @@ function renderBlank(){
 function searchBook(query){
     $.ajax({
         type: "POST",
-        url: "/searchBook",
+        url: "/searchsinglebook",
         async: false,
         data:{query:query},
         success:function (list) {
             let listHtml = ''
             $.each(list, function (i, value) {
-                listHtml +='<tr class="table-primary" onClick="renderDetail(\'' + value.title + '\')">' +
+                listHtml +='<tr class="table-primary" onClick="renderDetail(\'' + value.id + '\')">' +
                     '<th scope="row">' + value.title + '</th><td>' + value.author + '</td><td>' + value.isbn + '</td></tr>'
             })
             $("#bookListDisplay").html(listHtml)

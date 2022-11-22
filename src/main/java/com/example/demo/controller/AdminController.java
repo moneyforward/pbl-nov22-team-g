@@ -61,14 +61,17 @@ public class AdminController {
 
     }
     //need a button to change the book details.
-    @GetMapping("/amin/booklist")
-    public List<BookList> bookList(){return bookService.getBookList();}
+    @RequestMapping("/admin/searchsinglebook")
+    public List<BookList> searchsingleBook(@RequestParam("query")String query){
+        return bookService.searchSingleBook(query);
+    }
     @RequestMapping("/admin/editbook")
     public String editBook(@RequestParam("title")String title,
                            @RequestParam("author") String author,
                            @RequestParam("ISBN") String ISBN,
+                           @RequestParam("BookID") int BookID,
                            Model model){
-        if(bookService.addnewBook(title, author, ISBN)){
+        if(bookService.editBook(BookID,title, author, ISBN)){
             return "books/booklist";
         }else{
             model.addAttribute("msg","Add new book error");
@@ -78,10 +81,10 @@ public class AdminController {
     }
     @RequestMapping("/admin/addAdmin")
     public String addAdmin(@RequestParam("email")String email,
-                           @RequestParam("password") String password,
                            Model model){
-        if(adminService.addAdmin(email,password)){
-            model.addAttribute("msg","add success!");
+        String password =adminService.addAdmin(email);
+        if(password!=null){
+            model.addAttribute("msg","add success!,initial password is "+password);
         }else{
             model.addAttribute("msg","error!");
         }

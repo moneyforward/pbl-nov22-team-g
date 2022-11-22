@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class AdminService implements AdminServiceInter{
@@ -29,9 +30,17 @@ public class AdminService implements AdminServiceInter{
     }
 
     @Override
-    public Boolean addAdmin(String email, String Password) {
-        Admin admin = new Admin(email,Password);
-        return mapper.adminRegister(admin);
+    public String addAdmin(String email) {
+        String password = getinitialpassword(8);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String newpassword = bCryptPasswordEncoder.encode(password);
+        Admin admin = new Admin(email,newpassword);
+
+        if(mapper.adminRegister(admin)){
+            return password;
+        }else{
+            return null;
+        }
     }
 
     @Override
@@ -45,5 +54,17 @@ public class AdminService implements AdminServiceInter{
         }
     }
 
+    public String getinitialpassword(int length) {
+        Random random = new Random();
+        StringBuffer valSb = new StringBuffer();
+        String charStr = "0123456789abcdefghijklmnopqrstuvwxyz";
+        int charLength = charStr.length();
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(charLength);
+            valSb.append(charStr.charAt(index));
+        }
+        return valSb.toString();
+
+    }
 
 }

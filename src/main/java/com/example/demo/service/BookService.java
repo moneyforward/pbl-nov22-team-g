@@ -116,6 +116,11 @@ public class BookService implements BookServiceInter{
     }
 
     @Override
+    public List<BookList> searchSingleBook(String query) {
+        return mapper.searchSingleBook(query);
+    }
+
+    @Override
     public List<BorrowDetails> findoverdueBook(String status) {
         return mapper.getoverdueBook(status);
     }
@@ -125,4 +130,5 @@ public class BookService implements BookServiceInter{
 //        BorrowDetails borrowDetails =mapper.findbookDetails(BookID,UserID);
         return mapper.updatebookDetails("done",UserID,BookID);
     }
+
 }

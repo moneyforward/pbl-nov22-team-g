@@ -6,9 +6,11 @@ import com.example.demo.dao.UsersDao;
 import com.example.demo.pojo.Admin;
 import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.pojo.Users;
+import com.example.demo.service.AdminService;
 import com.example.demo.utils.MybBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -77,4 +79,14 @@ public class UsersDaoTest {
         mapper.updatebookDetails("done",1,2);
         sqlSession.commit();
     }
+    @Test
+    public void testpassword(){
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String a = bCryptPasswordEncoder.encode("123");
+//        System.out.println(a);
+        AdminService adminService = new AdminService();
+        String a = adminService.getinitialpassword(9);
+        System.out.println(a);
+    }
+
 }
