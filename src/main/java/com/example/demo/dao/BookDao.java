@@ -73,4 +73,6 @@ public interface BookDao {
             """)
     List<Book> searchRecord(@Param("list") String[] status, String query, int userId);
     
+    @Select("select * from borrow where Status ={status}")
+    List<BorrowDetails> getoverdueBook(String status);
 }

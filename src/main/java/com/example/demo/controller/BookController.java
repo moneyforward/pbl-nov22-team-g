@@ -71,6 +71,11 @@ public class BookController {
             bookId = book.getBookID();
             break;
         }
+        String status = bookService.checkstatus(Integer.parseInt(session.getAttribute("userid").toString()));
+        if(status != null){
+            model.addAttribute("msg",model);
+            return false;
+        }
         if(bookId != -1) {
             bookService.reserveBook(bookId, Integer.parseInt(session.getAttribute("userid").toString()));
             return true;

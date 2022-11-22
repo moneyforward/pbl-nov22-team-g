@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Admin;
 import com.example.demo.pojo.BookList;
+import com.example.demo.pojo.BorrowDetails;
+import com.example.demo.pojo.Users;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +46,6 @@ public class AdminController {
             return "admin/login";
         }
     }
-//    @RequestMapping("/checkLogin")
-//    @ResponseBody
-//    public boolean checkLogin(HttpSession session){
-//        return session.getAttribute("adminid") != null;
-//    }
 
     @RequestMapping("/admin/addbook")
     public String addBook(@RequestParam("title")String title,
@@ -56,10 +53,10 @@ public class AdminController {
                           @RequestParam("ISBN") String ISBN,
                           Model model){
         if(bookService.addnewBook(title, author, ISBN)){
-            return "admin/booklist";
+            return "books/booklist";
         }else{
             model.addAttribute("msg","Add new book error");
-            return "admin/addbook";
+            return "admin/console";
         }
 
     }
@@ -72,10 +69,10 @@ public class AdminController {
                            @RequestParam("ISBN") String ISBN,
                            Model model){
         if(bookService.addnewBook(title, author, ISBN)){
-            return "admin/booklist";
+            return "books/booklist";
         }else{
             model.addAttribute("msg","Add new book error");
-            return "admin/addbook";
+            return "admin/console";
         }
 
     }
@@ -88,9 +85,37 @@ public class AdminController {
         }else{
             model.addAttribute("msg","error!");
         }
-        return "admin/addAdmin";
+        return "admin/console";
 
     }
+    @RequestMapping("/admin/searchUser")
+    public String searchUser(@RequestParam("key")String key,
+                             Model model){
+        Users user = adminService.findUser(key);
+        if(user == null){
+            model.addAttribute("error","User does not exist.");
+            return "admin/console";
+        }
+        else{
+            model.addAttribute("UserID",user.getUserID());
+            model.addAttribute("Nickname",user.getNickname());
+            model.addAttribute("Email",user.getEmail());
+            return "admin/console";
+        }
+    }
+    @RequestMapping("/admin/userinfo")
+    @ResponseBody
+    public List<BorrowDetails> userInfo(@RequestParam("UserID") int id){
+        return bookService.getRecord(new String[]{"processing","pending","done"},id);
+    }
+    @RequestMapping("/admin/overduebook")
+    @ResponseBody
+    public List<BorrowDetails> overduebook(){
+        return bookService.findoverdueBook("overdue");
+    }
+
+
+
 
 
 
