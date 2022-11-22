@@ -29,9 +29,9 @@ public class AdminController {
             @RequestParam("email") String email,
             @RequestParam("password") String password,
             Model model, HttpServletRequest request, HttpServletResponse response) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        String encodepassword = bCryptPasswordEncoder.encode(password);
-        Admin admin = adminService.adminLogin(email,encodepassword);
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String encodepassword = bCryptPasswordEncoder.encode(password);
+        Admin admin = adminService.adminLogin(email,password);
         System.out.println(admin);
         if(admin !=null){
             request.getSession().setAttribute("adminid", admin.getAdminID());
