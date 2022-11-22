@@ -21,8 +21,8 @@ public interface UsersDao {
     Users getUserbyID(int ID);
     @Update("update Users set Nickname = #{Nickname},Password = #{Password},Email = #{Email} where UserID = #{UserID}")
     int updateUser(Users users);
-    @Delete("delete from Users where UserID = #{UserID}")
-    boolean deleteUser(Users users);
+//    @Delete("delete from Users where UserID = #{UserID}")
+//    boolean deleteUser(Users users);
 
 
 }
