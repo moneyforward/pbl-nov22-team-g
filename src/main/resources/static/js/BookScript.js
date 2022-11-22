@@ -1,9 +1,21 @@
+Request = {
+    QueryString : function(item){
+        const svalue = location.search.match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)","i"));
+        return svalue ? svalue[1] : svalue;
+    }
+};
+const query = decodeURIComponent(Request.QueryString("search"));
+
 let pages = []
 let pageCur = 0
 
 $(document).ready(
     function (){
-        getBookList()
+        if(query==='null') {
+            getBookList()
+        }else{
+            getSearch(query)
+        }
         renderPage(pageCur, 10)
         renderPageBar(pageCur, 10)
     }
@@ -15,7 +27,6 @@ function getBookList(){
         url:"/bookList",
         async:false,
         success:function(list) {
-            let buffer = ""
             $.each(list, function (i, value) {
                 pages.push('<tr class="table-primary" onClick="tableInnerLink(\''+value.title+'\')">' +
                     '<th scope="row">'+value.title+'</th><td>'+value.author+'</td><td>'+value.stock+'</td></tr>')
@@ -61,7 +72,24 @@ function renderPageBar(pageIndex, pageSize){
 }
 
 function changeShownRow(num){
-    console.log(num)
     renderPage(0, num)
     renderPageBar(0, num)
+}
+
+function getSearch(query){
+    $.ajax({
+        type: "POST",
+        url: "/searchBook",
+        async: false,
+        data:{query:query},
+        success:function (list) {
+            pages = []
+            $.each(list, function (i, value) {
+                pages.push('<tr class="table-primary" onClick="tableInnerLink(\'' + value.title + '\')">' +
+                    '<th scope="row">' + value.title + '</th><td>' + value.author + '</td><td>' + value.stock + '</td></tr>')
+            })
+            renderPage(0, 10)
+            renderPageBar(0, 10)
+        }
+    })
 }

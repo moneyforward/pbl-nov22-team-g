@@ -46,3 +46,7 @@ function checkPassValid(){
         submitBtn.removeAttr("disabled", "")
     }
 }
+
+function searchHerf(search){
+    location.href="booklist?search="+search
+}
