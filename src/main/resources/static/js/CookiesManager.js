@@ -53,6 +53,6 @@ function ifLogin(type){
         })
         return loginStatus
     }else{
-        return $.session.get("adminid") != null
+        return $.cookie("Email")!=null
     }
 }

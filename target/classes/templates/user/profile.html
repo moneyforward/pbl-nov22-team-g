@@ -15,6 +15,7 @@
   <script type="text/javascript" src="/js/ResponsiveAction.js"></script>
   <script type="text/javascript" src="/js/libs/jquery.qrcode.min.js"></script>
   <script type="text/javascript" src="/js/QRcoder.js"></script>
+  <script type="text/javascript" src="/js/ProfileScript.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -58,8 +59,8 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-sm-2" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control me-sm-2" type="text" placeholder="Search" id="queryText0">
+        <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="searchHerf($('#queryText0').val())">Search</button>
       </form>
       <a href="/login" id="login-btn" class="nav-link active">
         <input type="button" value="Log in" class="btn btn-primary">
@@ -80,13 +81,13 @@
   </ul>
   <div id="tab_content">
     <div id="t_1" class="tab-pane">
-      <form class="userform"method="post" action="/profile">
+      <form class="userform" method="post" action="/profile">
         <fieldset>
           <div class="form-group">
             <label for="emailDisabledInput" class="form-label mt-4">Email address</label>
             <input type="email" class="form-control" id="emailDisabledInput" aria-describedby="emailHelp"
-                   value=" " disabled="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: pointer;">
-            <button class="btn btn-danger btn-sm" onclick="editEmail()">! Edit the email</button>
+                   th:value="${email}" disabled="" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAfBJREFUWAntVk1OwkAUZkoDKza4Utm61iP0AqyIDXahN2BjwiHYGU+gizap4QDuegWN7lyCbMSlCQjU7yO0TOlAi6GwgJc0fT/fzPfmzet0crmD7HsFBAvQbrcrw+Gw5fu+AfOYvgylJ4TwCoVCs1ardYTruqfj8fgV5OUMSVVT93VdP9dAzpVvm5wJHZFbg2LQ2pEYOlZ/oiDvwNcsFoseY4PBwMCrhaeCJyKWZU37KOJcYdi27QdhcuuBIb073BvTNL8ln4NeeR6NRi/wxZKQcGurQs5oNhqLshzVTMBewW/LMU3TTNlO0ieTiStjYhUIyi6DAp0xbEdgTt+LE0aCKQw24U4llsCs4ZRJrYopB6RwqnpA1YQ5NGFZ1YQ41Z5S8IQQdP5laEBRJcD4Vj5DEsW2gE6s6g3d/YP/g+BDnT7GNi2qCjTwGd6riBzHaaCEd3Js01vwCPIbmWBRx1nwAN/1ov+/drgFWIlfKpVukyYihtgkXNp4mABK+1GtVr+SBhJDbBIubVw+Cd/TDgKO2DPiN3YUo6y/nDCNEIsqTKH1en2tcwA9FKEItyDi3aIh8Gl1sRrVnSDzNFDJT1bAy5xpOYGn5fP5JuL95ZjMIn1ya7j5dPGfv0A5eAnpZUY3n5jXcoec5J67D9q+VuAPM47D3XaSeL4AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: pointer;">
+            <button class="btn btn-danger btn-sm" onclick="editEmail()" type="button">! Edit the email</button>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1" class="form-label mt-4">New Password</label>
@@ -103,7 +104,7 @@
           </div>
           <div class="form-group">
             <label class="col-form-label mt-4" for="inputDefault">Nickname</label>
-            <input name = "nickname" type="text" class="form-control" placeholder="Come up with a nickname" id="inputDefault" value="th:@nick">
+            <input name = "nickname" type="text" class="form-control" placeholder="Come up with a nickname" id="inputDefault" th:value="${nickname}">
           </div>
           <br>
           <button type="submit" class="btn btn-primary btn-lg">Submit Edit</button>
@@ -114,14 +115,14 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Stock</th><th scope="col">Available</th>
-          <th>reserve button</th>
+          <th scope="col">Title</th><th scope="col">Available</th>
+          <th>reserve button</th><th>delete button</th>
         </tr>
         </thead>
-        <tbody>
-        <tr class="table-primary">
-          <th scope="row">render</th><td>render</td><td>render</td><td>render</td>
-          <td>render <button class="btn btn-secondary btn-sm">Reserve</button></td>
+        <tbody id="planBody">
+        <tr class="table-primary"><td>render</td><td>render</td>
+          <td><button class="btn btn-info btn-sm">Reserve</button></td>
+          <td><button class="btn btn-danger btn-sm">Delete</button></td>
         </tr>
         </tbody>
       </table>
@@ -130,10 +131,10 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Deadline</th><th scope="col">Status</th>
+          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">StartDate</th><th scope="col">Deadline</th><th scope="col">Status</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="inProgressBody">
         <tr class="table-primary">
           <th scope="row">render</th><td>render</td><td>render</td><td>render</td>
         </tr>
@@ -149,10 +150,10 @@
       <table class="table table-hover">
         <thead>
         <tr>
-          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Date</th><th scope="col">Status</th>
+          <th scope="col">Title</th><th scope="col">Author</th><th scope="col">StartDate</th><th scope="col">EndDate</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="historyBody">
         <tr class="table-primary">
           <th scope="row">render</th><td>render</td><td>render</td>
         </tr>
