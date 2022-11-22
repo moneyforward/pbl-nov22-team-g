@@ -5,6 +5,7 @@ import com.example.demo.pojo.BookList;
 import com.example.demo.service.AdminService;
 import com.example.demo.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +30,9 @@ public class AdminController {
             @RequestParam("email") String email,
             @RequestParam("password") String password,
             Model model, HttpServletRequest request, HttpServletResponse response) {
-        Admin admin = adminService.adminLogin(email,password);
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encodepassword = bCryptPasswordEncoder.encode(password);
+        Admin admin = adminService.adminLogin(email,encodepassword);
         System.out.println(admin);
         if(admin !=null){
             request.getSession().setAttribute("adminid", admin.getAdminID());

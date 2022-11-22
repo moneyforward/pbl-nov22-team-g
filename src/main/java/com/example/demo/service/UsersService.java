@@ -4,6 +4,7 @@ import com.example.demo.dao.UsersDao;
 import com.example.demo.pojo.Users;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -18,8 +19,8 @@ public class UsersService implements UserServiceInter{
     public Users userLogin(String useremail, String password){
 
         Users user = mapper.getUserbyEmail(useremail);
-
-        if(user!=null && user.getPassword().equals(password)){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        if(user!=null && bCryptPasswordEncoder.matches(password,user.getPassword())){
             return user;
         }else{
             return null;

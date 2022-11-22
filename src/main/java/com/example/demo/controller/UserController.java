@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.pojo.Users;
 import com.example.demo.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -58,10 +59,11 @@ public class UserController {
             @RequestParam("email") String useremail,
             @RequestParam("password") String password,
             @RequestParam("nickname") String nickname,
-            Model model, HttpServletRequest request){
-        String status= usersService.userSignup(useremail,password,nickname);
+            Model model){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String encodepassword = bCryptPasswordEncoder.encode(password);
+        String status= usersService.userSignup(useremail,encodepassword,nickname);
         if(status == null){
-//            request.getSession().setAttribute("User",nickname);
             return "user/login";
         }else{
             model.addAttribute("msg",status);
