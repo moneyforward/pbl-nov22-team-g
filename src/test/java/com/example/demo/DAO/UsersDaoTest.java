@@ -1,8 +1,10 @@
 package com.example.demo.DAO;
 
 import com.example.demo.dao.AdminDao;
+import com.example.demo.dao.BookDao;
 import com.example.demo.dao.UsersDao;
 import com.example.demo.pojo.Admin;
+import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.pojo.Users;
 import com.example.demo.utils.MybBatisUtils;
 import org.apache.ibatis.session.SqlSession;
@@ -67,5 +69,12 @@ public class UsersDaoTest {
         AdminDao mapper = sqlSession.getMapper(AdminDao.class);
         Admin admin = mapper.getAdminbyEmail("admin@mf.com");
         System.out.println(admin);
+    }
+    @Test
+    public void changestatus(){
+        sqlSession = MybBatisUtils.getSqlSession();
+        BookDao mapper = sqlSession.getMapper(BookDao.class);
+        mapper.updatebookDetails("done",1,2);
+        sqlSession.commit();
     }
 }

@@ -94,6 +94,13 @@ public class BookController {
     public List<BorrowDetails> getHistory(HttpSession session){
         return bookService.getRecord(new String[]{"done"}, Integer.parseInt(session.getAttribute("userid").toString()));
     }
+    @RequestMapping("/returnbook")
+    public boolean returnBook(@RequestParam("bookid")int bookid,
+                             HttpSession session){
+        return bookService.returnBook(bookid,Integer.parseInt(session.getAttribute("userid").toString()));
+
+
+    }
 
     @RequestMapping("/searchBook")
     @ResponseBody
