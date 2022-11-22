@@ -43,7 +43,12 @@ public class UserController {
     @RequestMapping("/checkLogin")
     @ResponseBody
     public boolean checkLogin(HttpSession session){
-        return session.getAttribute("userid") != null;
+        if(session.getAttribute("userid") != null){
+            return true;
+        }else{
+            session.invalidate();
+            return false;
+        }
     }
     @RequestMapping("/getUserId")
     @ResponseBody
