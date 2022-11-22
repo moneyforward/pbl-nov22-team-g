@@ -60,4 +60,22 @@ public class BookService implements BookServiceInter{
         book.setTitle(title);
         return mapper.updateUser(book);
     }
+
+    @Override
+    public String checkstatus(int userID) {
+        int count = mapper.getRecord(new String[]{"processing"},userID).size();
+        if(count >10){
+            return "check out books up to 10 !";
+        }
+        if(mapper.getRecord(new String[]{"overdue"},userID)!=null){
+            return "You have to return the overdue book first!";
+        }
+        return null;
+
+    }
+
+    @Override
+    public List<BorrowDetails> findoverdueBook(String status) {
+        return mapper.getoverdueBook(status);
+    }
 }

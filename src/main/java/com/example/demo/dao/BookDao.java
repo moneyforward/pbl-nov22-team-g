@@ -57,4 +57,6 @@ public interface BookDao {
 
     @Update("UPDATE borrow SET Status='overdue' WHERE Status='processing' AND EndDate < NOW() AND userid=#{userId}")
     void updateProcessing(int userId);
+    @Select("select * from borrow where Status ={status}")
+    List<BorrowDetails> getoverdueBook(String status);
 }

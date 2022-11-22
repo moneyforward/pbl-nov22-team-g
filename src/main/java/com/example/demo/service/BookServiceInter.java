@@ -18,4 +18,6 @@ public interface BookServiceInter {
     List<BorrowDetails> getRecord(String[] status,int userId);
     boolean addnewBook(String title,String author,String ISBN);
     boolean editBook(int BookID, String title,String author,String ISBN);
+    List<BorrowDetails> findoverdueBook(String status);
+    String checkstatus(int userID);
 }
