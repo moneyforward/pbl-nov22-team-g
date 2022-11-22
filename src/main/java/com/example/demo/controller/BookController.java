@@ -101,4 +101,10 @@ public class BookController {
 
 
     }
+
+    @RequestMapping("/searchBook")
+    @ResponseBody
+    public List<BookList> searchBook(@RequestParam("query") String query){
+        return bookService.searchBook(query);
+    }
 }

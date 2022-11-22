@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 @Mapper
 public interface BookDao {
-    @Select("select title, author, count(*) stock from book GROUP BY title")
+    @Select("select title, author, count(*) stock, isbn from book GROUP BY title")
     List<BookList> getBookList();
     @Select("select * from libsystem.Book where Title = #{title}")
     Book findBookbyTitle(String title);
@@ -61,6 +61,22 @@ public interface BookDao {
 
     @Update("UPDATE borrow SET Status='overdue' WHERE Status='processing' AND EndDate < NOW() AND userid=#{userId}")
     void updateProcessing(int userId);
+    @Select("""
+            select title, author, count(*) stock, isbn from book
+            WHERE title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%')
+            GROUP BY title
+            """)
+    List<BookList> searchBook(String query);
+    @Select("""
+            <script>
+            SELECT borrow.recordid, borrow.startdate, borrow.enddate, borrow.status, borrow.userid, borrow.bookid, book.title, book.author
+            FROM borrow LEFT JOIN book ON borrow.bookid=book.bookid WHERE borrow.status IN
+            <foreach item='status' index='index' collection='list' open='(' separator=',' close=')'>#{status}</foreach>
+            AND borrow.userid=#{userId} AND (book.title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%'))
+            </script>
+            """)
+    List<Book> searchRecord(@Param("list") String[] status, String query, int userId);
+    
     @Select("select * from borrow where Status ={status}")
     List<BorrowDetails> getoverdueBook(String status);
 }
