@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.BookDao;
 import com.example.demo.pojo.Book;
+import com.example.demo.pojo.BookDetail;
 import com.example.demo.pojo.BookList;
 import com.example.demo.pojo.BorrowDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,12 @@ public class BookService implements BookServiceInter{
     @Autowired
     private BookDao mapper;
     @Override
-    public Book findBookByTitle(String title){
+    public BookDetail findBookByTitle(String title){
         return mapper.findBookbyTitle("title");
     }
 
     @Override
-    public List<Book> getBookDetail(String title){
+    public List<BookDetail> getBookDetail(String title){
         return mapper.getBookDetailByTitle(title);
     }
 
@@ -33,7 +34,7 @@ public class BookService implements BookServiceInter{
     @Override
     public void reserveBook(int bookId, int userId){mapper.reverseBook(bookId, userId);}
     @Override
-    public List<Book> getReadPlan(int userId){
+    public List<BookDetail> getReadPlan(int userId){
         mapper.updatePending(userId);
         return mapper.getReadPlan(userId);
     }
@@ -55,7 +56,7 @@ public class BookService implements BookServiceInter{
     public boolean editBook(int BookID,String title, String author, String ISBN) {
 
         Book book = mapper.findBookbyID(BookID);
-        book.setAuthor(author);
+        book.setAuthour(author);
         book.setISBN(ISBN);
         book.setTitle(title);
         return mapper.updateUser(book);
@@ -131,4 +132,8 @@ public class BookService implements BookServiceInter{
         return mapper.updatebookDetails("done",BookID);
     }
 
+    @Override
+    public Book findbookbyID(int BookID) {
+        return mapper.findBookbyID(BookID);
+    }
 }
