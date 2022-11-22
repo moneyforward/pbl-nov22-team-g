@@ -16,10 +16,10 @@ function searchUser(query){
 
 function renderDetail(bid){
     $.ajax({
-        url: "/returnBook",
+        url: "/admin/findbookbyID",
         type: "post",
         async:false,
-        data:{bookid:bid},
+        data:{BookID:bid},
         success: function (detail) {
             $("#bookConsole").html('<form action="/admin/editBook">'+
                 '<div class="form-group">' +
@@ -34,6 +34,7 @@ function renderDetail(bid){
                 '<button type="submit" class="btn btn-primary btn-lg">Submit</button></form>')
         }
     })
+    location.href="/console#t_3"
 }
 function renderBlank(){
     $("#bookConsole").html('<form action="/admin/addbook">'+
@@ -58,7 +59,7 @@ function searchBook(query){
         success:function (list) {
             let listHtml = ''
             $.each(list, function (i, value) {
-                listHtml +='<tr class="table-primary" onClick="renderDetail(\'' + value.id + '\')">' +
+                listHtml +='<tr class="table-primary" onclick="renderDetail(\'' + value.bookid + '\')">' +
                     '<th scope="row">' + value.title + '</th><td>' + value.author + '</td><td>' + value.isbn + '</td></tr>'
             })
             $("#bookListDisplay").html(listHtml)

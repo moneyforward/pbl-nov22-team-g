@@ -64,8 +64,9 @@ public class AdminController {
         return bookService.searchSingleBook(query);
     }
     @RequestMapping("/admin/findbookbyID")
-    public Book findbookbyID(@RequestParam("BookID") int bookID){
-        return bookService.findbookbyID(bookID);
+    @ResponseBody
+    public Book findbookbyID(@RequestParam("BookID") String bookID){
+        return bookService.findbookbyID(Integer.parseInt(bookID));
     }
     @RequestMapping("/admin/editbook")
     public String editBook(@RequestParam("title")String title,
