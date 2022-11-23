@@ -60,7 +60,7 @@ public class AdminController {
     //need a button to change the book details.
     @RequestMapping("/admin/searchsinglebook")
     @ResponseBody
-    public List<BookList> searchsingleBook(@RequestParam("query")String query){
+    public List<Book> searchsingleBook(@RequestParam("query")String query){
         return bookService.searchSingleBook(query);
     }
     @RequestMapping("/admin/findbookbyID")
@@ -100,14 +100,14 @@ public class AdminController {
         Users user = adminService.findUser(key);
         if(user == null){
             model.addAttribute("error","User does not exist.");
-            return "admin/console";
         }
         else{
             model.addAttribute("UserID",user.getUserID());
             model.addAttribute("Nickname",user.getNickname());
             model.addAttribute("Email",user.getEmail());
-            return "admin/console";
+            System.out.println(model);
         }
+        return "/admin/console";
     }
     @RequestMapping("/admin/userinfo")
     @ResponseBody

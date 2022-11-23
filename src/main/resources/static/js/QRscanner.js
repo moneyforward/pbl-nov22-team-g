@@ -47,6 +47,8 @@ function checkIn(userid){
         success: function (e){
             if(!e){
                 alert("Invalid User")
+            }else{
+                location.href="/console#t_5"
             }
         }
     })
@@ -58,7 +60,7 @@ function checkOut(bookCode){
         url:"/returnbook",
         data:{bookid:bookid},
         success:function (e){
-
+            alert("Success!")
         }
     })
 }

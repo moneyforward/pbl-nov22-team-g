@@ -6,11 +6,12 @@ import lombok.Data;
 public class Book {
     private int BookID;
     private String Title;
-    private String Authour;
+    private String Author;
     private String ISBN;
-    public Book(String Title,String Authour,String ISBN){
+    public Book(int bookID, String Title,String Author,String ISBN){
+        this.BookID = bookID;
         this.Title=Title;
-        this.Authour =Authour;
+        this.Author =Author;
         this.ISBN =ISBN;
     }
 }
