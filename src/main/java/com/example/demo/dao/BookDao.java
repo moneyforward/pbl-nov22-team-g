@@ -32,8 +32,8 @@ public interface BookDao {
     void reverseBook(int bookId, int userId);
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
-    @Update("update borrow set status = #{status} where UserID = #{userID} AND BookID = #{bookID}")
-    boolean updatebookDetails(String status,int userID,int bookID);
+    @Update("update borrow set status = #{status} where BookID = #{bookID} AND status='processing'")
+    boolean updatebookDetails(String status,int bookID);
 
     @Select("""
             SELECT ifnull(avail.bookid,0), plans.booktitle, avail.author, avail.status, ifnull(avail.statusCount, 0), isbn FROM
@@ -67,11 +67,11 @@ public interface BookDao {
             """)
     List<BookList> searchBook(String query);
     @Select("""
-            select title, author, count(*) stock, isbn from book
+            select bookid, title, author, isbn from book
             WHERE title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%')
             
             """)
-    List<BookList> searchSingleBook(String query);
+    List<Book> searchSingleBook(String query);
     @Select("""
             <script>
             SELECT borrow.recordid, borrow.startdate, borrow.enddate, borrow.status, borrow.userid, borrow.bookid, book.title, book.author

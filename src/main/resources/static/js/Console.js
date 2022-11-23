@@ -2,24 +2,21 @@ function searchUser(query){
     $.ajax({
         url: "/admin/searchUser",
         type: "post",
+        async: true,
         data:{key:query},
-        success: function (){
-            let userHtml = '<ul class="list-group list-group-flush">' +
-                '<li class="list-group-item" th:text="${UserID}"></li>' +
-                '<li class="list-group-item" th:text="${Nickname}"></li>' +
-                '<li class="list-group-item" th:text="${Email}"></li>' +
-                '</ul>'
-            $("#userDisplay").html(userHtml)
+        success: function (e){
+
         }
     })
 }
 
-function renderDetail(title){
+function renderDetail(bid){
+    location.href="/console#t_3"
     $.ajax({
-        url: "/bookDetail",
+        url: "/admin/findbookbyID",
         type: "post",
         async:false,
-        data:{title:title},
+        data:{BookID:bid},
         success: function (detail) {
             $("#bookConsole").html('<form action="/admin/editBook">'+
                 '<div class="form-group">' +
@@ -46,7 +43,7 @@ function renderBlank(){
         '<div class="form-group">' +
         '<label class="col-form-label mt-4" for="inputDefault2">ISBN</label>' +
         '<input type="text" name="ISBN" class="form-control" placeholder="Enter the ISBN" id="inputDefault2"></div>'+
-        '<button type="submit" class="btn btn primary btn-lg">Submit</button></form>')
+        '<button type="submit" class="btn btn-primary btn-lg">Submit</button></form>')
 }
 
 function searchBook(query){
@@ -58,7 +55,7 @@ function searchBook(query){
         success:function (list) {
             let listHtml = ''
             $.each(list, function (i, value) {
-                listHtml +='<tr class="table-primary" onClick="renderDetail(\'' + value.id + '\')">' +
+                listHtml +='<tr class="table-primary" onclick="renderDetail(\'' + value.bookID + '\')">' +
                     '<th scope="row">' + value.title + '</th><td>' + value.author + '</td><td>' + value.isbn + '</td></tr>'
             })
             $("#bookListDisplay").html(listHtml)
