@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.BookDetail;
 import com.example.demo.pojo.BookList;
+import com.example.demo.pojo.Borrow;
 import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.service.BookService;
 import com.example.demo.service.SuperusersService;
@@ -85,7 +86,7 @@ public class BookController {
     @RequestMapping("/getInProgress")
     @ResponseBody
     public List<BorrowDetails> getInProgress(HttpSession session){
-        return bookService.getRecord(new String[]{"processing", "pending"}, Integer.parseInt(session.getAttribute("userid").toString()));
+        return bookService.getRecord(new String[]{"processing", "pending", "overdue"}, Integer.parseInt(session.getAttribute("userid").toString()));
     }
 
     @RequestMapping("/getHistory")
@@ -108,7 +109,13 @@ public class BookController {
     @RequestMapping("/readUserQRCode")
     @ResponseBody
     public List<BorrowDetails> readUserQRCode(String userCode){
-        int userid = (Integer.parseInt(userCode)-414)/42;
+        int userid = userCode.charAt(0) == 'u' ?(Integer.parseInt(userCode.substring(1))-414)/42:Integer.parseInt(userCode);
         return bookService.getRecord(new String[]{"pending"}, userid);
+    }
+
+    @RequestMapping("findOverdueBook")
+    @ResponseBody
+    public List<Borrow> findOverdueBook(){
+        return bookService.findoverdueBook("overdue");
     }
 }

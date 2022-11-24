@@ -1,14 +1,45 @@
-function searchUser(query){
+$(document).ready(function () {
     $.ajax({
-        url: "/admin/searchUser",
-        type: "post",
-        async: true,
-        data:{key:query},
-        success: function (e){
+        url:"/findOverdueBook",
+        async:false,
+        success: function (list){
+            let recordHtml = ''
+            $.each(list, function (i, record){
+                recordHtml += '<tr class="table-primary">' +
+                    '<th scope="row">'+record.isbn+'</th><td>'+record.title+'</td><td>'+record.userID+'</td>' +
+                    '<td>'+record.startDate+'</td><td>'+record.endDate+'</td></tr>'
+            })
+            $("#overdueBody").html(recordHtml)
+        }
+    })
+})
 
+function banUser(uid){
+    $.ajax({
+        url:"/banUser",
+        type: "post",
+        async: false,
+        data: {userCode: uid},
+        success: function () {
+            alert("Success")
+            location.href="/console"
         }
     })
 }
+
+function unBanUser(uid){
+    $.ajax({
+        url:"/unBanUser",
+        type: "post",
+        async: false,
+        data: {userCode: uid},
+        success: function () {
+            alert("Success")
+            location.href="/console"
+        }
+    })
+}
+
 
 function renderDetail(bid){
     location.href="/console#t_3"
