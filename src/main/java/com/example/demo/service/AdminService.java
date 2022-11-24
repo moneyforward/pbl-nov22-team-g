@@ -67,4 +67,12 @@ public class AdminService implements AdminServiceInter{
 
     }
 
+    public void banUser(int userId){
+        mapper.banUser(userId);
+    }
+
+    public void unBanUser(int userId){
+        mapper.unBanUser(userId);
+    }
+
 }

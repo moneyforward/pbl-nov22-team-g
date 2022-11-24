@@ -19,13 +19,15 @@ $(document).ready(function (){
         $("#logout").hide()
         $("#username").hide()
     }
-    if($.cookie("Overdue")!=null) {
-        const alert = $("#overdueAlert")
-        alert.show()
-        if ($.cookie("Overdue") === "1"){
-            alert.html("You need to return the book, check the reservation page")
-        }else {
-            alert.html("You will be unblocked by "+$.cookie("Overdue"))
+    if($.cookie("status")!=="-1") {
+        if($.cookie("status")==="0"){
+            $("#overdueAlert").text("Borrowed book is over 10")
+        }
+        if($.cookie("status")==="1"){
+            $("#overdueAlert").text("Book Overdue")
+        }
+        if($.cookie("status")==="2"){
+            $("#overdueAlert").text("Baned by librarians")
         }
     }else{
         $("#overdueAlert").hide()

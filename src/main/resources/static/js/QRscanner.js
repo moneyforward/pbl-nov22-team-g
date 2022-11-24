@@ -6,7 +6,7 @@ Html5Qrcode.getCameras().then(devices => {
             (decodedText, decodedResult) => {
             if(decodedText.startsWith("u")){
                 location.href="/console#t_5"
-                readUserQRCode(decodedText.substring(1))
+                readUserQRCode(decodedText)
             }
             if(decodedText.startsWith("b")){
                 checkOut(decodedText)
@@ -24,7 +24,7 @@ function readUserQRCode(userCode){
     $.ajax({
         url:"/readUserQRCode",
         type:"post",
-        async:true,
+        async:false,
         data:{userCode:userCode},
         success: function (records){
             let recordsHtml = '<table class="table table-hover"><thead><tr><th scope="col">Title</th><th scope="col">Author</th><th scope="col">StartDate</th><th scope="col">Deadline</th><th scope="col">Status</th>' +
