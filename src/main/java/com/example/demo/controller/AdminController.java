@@ -68,14 +68,14 @@ public class AdminController {
     public Book findbookbyID(@RequestParam("BookID") String bookID){
         return bookService.findbookbyID(Integer.parseInt(bookID));
     }
-    @RequestMapping("/admin/editbook")
+    @RequestMapping("/admin/editBook")
     public String editBook(@RequestParam("title")String title,
                            @RequestParam("author") String author,
                            @RequestParam("ISBN") String ISBN,
                            @RequestParam("BookID") int BookID,
                            Model model){
         if(bookService.editBook(BookID,title, author, ISBN)){
-            return "books/booklist";
+            return "admin/console";
         }else{
             model.addAttribute("msg","Add new book error");
             return "admin/console";

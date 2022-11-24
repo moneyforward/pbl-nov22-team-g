@@ -20,7 +20,7 @@ public interface BookDao {
     Book findBookbyID(int BookID);
     @Insert("insert INTO Book(Title,Author,ISBN) values(#{Title},#{Author},#{ISBN})")
     boolean addBook(Book newbook);
-    @Update("update Book set Title = #{title},Author = #{author},ISBN = #{ISBN} where Title = #{BookID}")
+    @Update("update Book set Title = #{title},Author = #{author},ISBN = #{ISBN} where BookID = #{BookID}")
     boolean updateUser(Book bookDetail);
     @Delete("delete from libsystem.Book where BookID = #{BookID}")
     boolean deletBook(int BookID);

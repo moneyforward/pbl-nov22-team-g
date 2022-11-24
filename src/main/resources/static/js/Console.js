@@ -20,6 +20,9 @@ function renderDetail(bid){
         success: function (detail) {
             $("#bookConsole").html('<form action="/admin/editBook">'+
                 '<div class="form-group">' +
+                '<label class="col-form-label mt-4" for="inputDefault">BookID</label>' +
+                '<input type="text" name="BookID" class="form-control" placeholder="Enter the ID" id="inputDefault" value="'+bid+'"></div>' +
+                '<div class="form-group">' +
                 '<label class="col-form-label mt-4" for="inputDefault">Title</label>' +
                 '<input type="text" name="title" class="form-control" placeholder="Enter the title" id="inputDefault" value="'+detail.title+'"></div>' +
                 '<div class="form-group">' +
