@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.pojo.Users;
+import com.example.demo.service.BookService;
 import com.example.demo.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,6 +19,9 @@ public class UserController {
     @Autowired
     private UsersService usersService;
 
+    @Autowired
+    private BookService bookService;
+
     @RequestMapping("/login")
     public String login(
             @RequestParam("email1") String useremail,
@@ -27,6 +31,9 @@ public class UserController {
         if(userInfo !=null){
             request.getSession().setAttribute("userid", userInfo.getUserID());
             // need overdue status for session & cookie
+            Cookie statusCookie = new Cookie("status", bookService.getStatus(userInfo.getUserID()));
+            statusCookie.setMaxAge(120);
+            response.addCookie(statusCookie);
 
             Cookie usernameCookie = new Cookie("username", userInfo.getNickname());
             usernameCookie.setMaxAge(120);

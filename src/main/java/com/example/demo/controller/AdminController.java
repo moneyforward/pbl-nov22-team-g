@@ -105,7 +105,15 @@ public class AdminController {
             model.addAttribute("UserID",user.getUserID());
             model.addAttribute("Nickname",user.getNickname());
             model.addAttribute("Email",user.getEmail());
-            System.out.println(model);
+
+            String userStatus = bookService.checkstatus(user.getUserID());
+            if(userStatus == null) {
+                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode(" + user.getUserID() + ")\">Check Reservation</button>" +
+                        "<button class=\"btn btn-danger\" onclick=\"banUser(" + user.getUserID() + ")\">Ban</button>");
+            }else{
+                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode(" + user.getUserID() + ")\">Check Reservation</button>" +
+                        "<button class=\"btn btn-danger\" onclick=\"unBanUser(" + user.getUserID() + ")\">Active</button><p class=\"text-danger\">"+userStatus+"</p>");
+            }
         }
         return "/admin/console";
     }
@@ -120,12 +128,15 @@ public class AdminController {
         return bookService.findoverdueBook("overdue");
     }
 
+    @RequestMapping("/banUser")
+    public String banUser(String userCode){
+        adminService.banUser(Integer.parseInt(userCode));
+        return "/admin/console";
+    }
 
-
-
-
-
-
-
-
+    @RequestMapping("/unBanUser")
+    public String unBanUser(String userCode){
+        adminService.unBanUser(Integer.parseInt(userCode));
+        return "/admin/console";
+    }
 }

@@ -27,7 +27,8 @@
     <li class="nav-item"><a class="nav-link" href="#t_2">Book Info</a></li>
     <li class="nav-item"><a class="nav-link" href="#t_3">Edit Books</a></li>
     <li class="nav-item"><a class="nav-link" href="#t_4">Scan code</a></li>
-    <li class="nav-item"><a class="nav-link" href="#t_5">#</a></li>
+    <li class="nav-item"><a class="nav-link" href="#t_5">User Reservation</a></li>
+    <li class="nav-item"><a class="nav-link" href="#t_6">Overdue List</a></li>
 </ul>
 <div id="tab_content">
     <div id="t_1" class="tab-pane">
@@ -35,12 +36,14 @@
             <input class="form-control me-sm-2" type="text" placeholder="Search" id="userSearch" name="key">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <div id="userDisplay">
-            <ul class="list-group list-group-flush">
-            <p class="text-info">UserId:</p> <li class="list-group-item" th:text="${UserID}"></li>
-            <p class="text-info">NickName: </p><li class="list-group-item" th:text="${Nickname}"></li>
-            <p class="text-info">Email:</p> <li class="list-group-item" th:text="${Email}"></li>
-            </ul>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item" th:text="${UserID}" id="userId"><</li>
+            <li class="list-group-item" th:text="${Nickname}"></li>
+            <li class="list-group-item" th:text="${Email}"></li>
+        </ul>
+        <div id="userRecordDisplay" th:utext="${btnHtml}">
+
         </div>
     </div>
     <div id="t_2" class="tab-pane">
@@ -52,7 +55,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th scope="col">Title</th><th scope="col">Author</th><th scope="col">Stock</th>
+                <th scope="col">Title</th><th scope="col">Author</th><th scope="col">ISBN</th>
             </tr>
             </thead>
             <tbody id="bookListDisplay">
@@ -68,10 +71,21 @@
     <div id="t_5" class="tab-pane">
 
     </div>
+    <div id="t_6" class="tab-pane">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ISBN</th><th scope="col">title</th><th scope="col">UserId</th><th scope="col">StartDate</th><th scope="col">Deadline</th>
+            </tr>
+            </thead>
+            <tbody id="overdueBody">
+            </tbody>
+        </table>
+    </div>
 </div>
 <script type="text/javascript">
     if(!ifLogin("admin")) {
-        location.href="/login"
+        location.href="/admin"
     }else{
         $("#adminName").text("Welcome! "+$.cookie("Email"))
     }

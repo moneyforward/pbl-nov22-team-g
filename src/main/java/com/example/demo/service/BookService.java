@@ -104,14 +104,30 @@ public class BookService implements BookServiceInter{
     public String checkstatus(int userID) {
         int count = mapper.getRecord(new String[]{"processing"},userID).size();
         if(count >10){
-            return "check out books up to 10 !";
+            return "Check out books up to 10!";
         }
         if(mapper.getRecord(new String[]{"overdue"},userID).size() != 0){
-            return "You have to return the overdue book first!";
+            return "Have overdue book!";
+        }
+        if(mapper.getRecord(new String[]{"baned"},userID).size() != 0){
+            return "Baned by admin";
         }
         return null;
-
     }
+    public String getStatus(int userID) {
+        int count = mapper.getRecord(new String[]{"processing"},userID).size();
+        if(count >10){
+            return "0";
+        }
+        if(mapper.getRecord(new String[]{"overdue"},userID).size() != 0){
+            return "1";
+        }
+        if(mapper.getRecord(new String[]{"baned"},userID).size() != 0){
+            return "2";
+        }
+        return "-1";
+    }
+
 
     @Override
     public List<Book> searchSingleBook(String query) {

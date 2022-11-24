@@ -11,5 +11,7 @@ public interface AdminServiceInter {
     Admin adminLogin(String nickname, String password);
     String addAdmin(String nickname);
     Users findUser(String keyWords);
+    void banUser(int userId);
+    void unBanUser(int userId);
 
 }

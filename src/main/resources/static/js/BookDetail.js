@@ -57,7 +57,7 @@ function reserveBook(e){
             if(flag) {
                 alert("'" + titleVar + "' has been added. Please go library and ask check out in 24H")
             }else{
-                alert("'" + titleVar + "' is out of stock")
+                alert("'" + titleVar + "' is out of stock or you are baned, please check")
             }
         }
     })
