@@ -3,9 +3,13 @@ package com.example.demo.DAO;
 import com.example.demo.dao.BookDao;
 import com.example.demo.pojo.Book;
 import com.example.demo.pojo.BookDetail;
+import com.example.demo.pojo.Borrow;
+import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.utils.MybBatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
+
+import java.util.List;
 
 public class BookDetailDaoTest {
     SqlSession sqlSession;
@@ -31,6 +35,15 @@ public class BookDetailDaoTest {
         result.setAuthor("hhhh");
         mapper.updateUser(result);
         sqlSession.commit();
+        sqlSession.close();
+
+    }
+    @Test
+    public void overduefind(){
+        sqlSession = MybBatisUtils.getSqlSession();
+        BookDao mapper= sqlSession.getMapper(BookDao.class);
+        List<Borrow> result = mapper.getoverdueBook("overdue");
+        System.out.println(result);
         sqlSession.close();
 
     }

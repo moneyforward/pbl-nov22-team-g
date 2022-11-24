@@ -1,11 +1,13 @@
 package com.example.demo.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.HashMap;
 
 //public record Book(String BookID,String Title, String Author,String ISBN){};
 @Data
+
 public class BookDetail {
     private int BookID;
     private String Title;
@@ -28,6 +30,7 @@ public class BookDetail {
         this.Author = Author;
         this.ISBN =ISBN;
     }
+
 
     public HashMap<String, String> buildPublicInfo(){
         HashMap<String, String> map = new HashMap<>();

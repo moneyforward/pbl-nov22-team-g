@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.pojo.Book;
-import com.example.demo.pojo.BookDetail;
-import com.example.demo.pojo.BookList;
-import com.example.demo.pojo.BorrowDetails;
+import com.example.demo.pojo.*;
 
 import java.util.List;
 
@@ -21,7 +18,7 @@ public interface BookServiceInter {
     boolean editBook(int BookID, String title,String author,String ISBN);
     List<BookList> searchBook(String query);
     List<Book> searchSingleBook(String query);
-    List<BorrowDetails> findoverdueBook(String status);
+    List<Borrow> findoverdueBook(String status);
     String checkstatus(int userID);
     boolean returnBook(int BookID);
 

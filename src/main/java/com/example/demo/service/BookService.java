@@ -1,10 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dao.BookDao;
-import com.example.demo.pojo.Book;
-import com.example.demo.pojo.BookDetail;
-import com.example.demo.pojo.BookList;
-import com.example.demo.pojo.BorrowDetails;
+import com.example.demo.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -122,7 +119,7 @@ public class BookService implements BookServiceInter{
     }
 
     @Override
-    public List<BorrowDetails> findoverdueBook(String status) {
+    public List<Borrow> findoverdueBook(String status) {
         return mapper.getoverdueBook(status);
     }
 

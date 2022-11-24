@@ -1,9 +1,6 @@
 package com.example.demo.dao;
 
-import com.example.demo.pojo.Book;
-import com.example.demo.pojo.BookDetail;
-import com.example.demo.pojo.BookList;
-import com.example.demo.pojo.BorrowDetails;
+import com.example.demo.pojo.*;
 import org.apache.ibatis.annotations.*;
 
 
@@ -82,6 +79,6 @@ public interface BookDao {
             """)
     List<BookDetail> searchRecord(@Param("list") String[] status, String query, int userId);
     
-    @Select("select * from borrow where Status ={status}")
-    List<BorrowDetails> getoverdueBook(String status);
+    @Select("select * from borrow where Status = #{status}" )
+    List<Borrow> getoverdueBook(String status);
 }

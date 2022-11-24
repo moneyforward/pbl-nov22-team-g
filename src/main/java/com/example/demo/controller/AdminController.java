@@ -116,7 +116,7 @@ public class AdminController {
     }
     @RequestMapping("/admin/overduebook")
     @ResponseBody
-    public List<BorrowDetails> overduebook(){
+    public List<Borrow> overduebook(){
         return bookService.findoverdueBook("overdue");
     }
 
