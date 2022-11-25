@@ -5,7 +5,6 @@ import com.example.demo.pojo.BookList;
 import com.example.demo.pojo.Borrow;
 import com.example.demo.pojo.BorrowDetails;
 import com.example.demo.service.BookService;
-import com.example.demo.service.SuperusersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,7 +62,7 @@ public class BookController {
 
     @RequestMapping("/reserveBook")
     @ResponseBody
-    public boolean reserveBook(String title, HttpSession session, Model model){
+    public String reserveBook(String title, HttpSession session, Model model){
         List<BookDetail> bookDetailStatuses = bookService.getBookDetail(title);
         int bookId = -1;
         for(BookDetail bookDetail : bookDetailStatuses){
@@ -74,13 +73,13 @@ public class BookController {
         String status = bookService.checkstatus(Integer.parseInt(session.getAttribute("userid").toString()));
         if(status != null){
             model.addAttribute("msg", status);
-            return false;
+            return status;
         }
         if(bookId != -1) {
             bookService.reserveBook(bookId, Integer.parseInt(session.getAttribute("userid").toString()));
-            return true;
+            return "success!";
         }
-        return false;
+        return "unexpected error!";
     }
 
     @RequestMapping("/getInProgress")
@@ -95,6 +94,7 @@ public class BookController {
         return bookService.getRecord(new String[]{"done"}, Integer.parseInt(session.getAttribute("userid").toString()));
     }
     @RequestMapping("/returnbook")
+    @ResponseBody
     public boolean returnBook(@RequestParam("bookid")int bookid,
                              HttpSession session){
         return bookService.returnBook(bookid);

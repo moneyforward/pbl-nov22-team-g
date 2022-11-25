@@ -59,6 +59,7 @@ function checkOut(bookCode){
     $.ajax({
         url:"/returnbook",
         data:{bookid:bookid},
+        type:"post",
         success:function (e){
             alert("Success!")
         }

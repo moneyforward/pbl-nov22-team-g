@@ -20,7 +20,7 @@ function getReadPlans(){
                 }
                 planHtml += '<tr class="table-primary">' +
                     '<th scope="row" onclick="tableInnerLink('+plan.title+')">'+plan.title+'</th><td>'+plan.statusCount+'</td>' +
-                    '<td><button class="'+btnClass+'" onclick="reserveBook('+plan.title+')">Reserve</button></td>' +
+                    '<td onclick="tableInnerLink('+plan.title+')"><button class="'+btnClass+'">Reserve</button></td>' +
                     '<td><button class="btn btn-danger btn-sm" onclick="deletePlan('+plan.title+')">Delete</button></td></tr>'
             })
             $("#planBody").html(planHtml)
@@ -30,14 +30,15 @@ function getReadPlans(){
 
 function deletePlan(title){
     $.ajax({
-        url:"/deletePlans",
+        url:"/deleteReadPlan",
         type:"post",
         async: false,
         data:{title:title},
         success: function (e){
-            location.href = "/profile#tab_2"
+            location.href = ""
         }
     })
+    location.href = ""
 }
 
 function getInProgress(){
