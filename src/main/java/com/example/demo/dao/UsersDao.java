@@ -12,7 +12,7 @@ public interface UsersDao {
     @Select("select * from Users where Nickname = #{Nickname} ")
     Users checkUser(String NickName);
     @Insert("insert INTO users(Nickname,Password,Email) values(#{Nickname},#{Password},#{Email})")
-    boolean userRegister(String Nickname,String Password,String Email);
+    boolean userRegister(@Param("Nickname") String Nickname,@Param("Password") String Password,@Param("Email") String Email);
     @Select("select * from users where Email = #{Email}")
     Users getUserbyEmail(String Email);
     @Select("select * from users where Nickname = #{Nickname}")

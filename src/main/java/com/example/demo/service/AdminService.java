@@ -36,7 +36,7 @@ public class AdminService implements AdminServiceInter{
         String newpassword = bCryptPasswordEncoder.encode(password);
         Admin admin = new Admin(email,newpassword);
 
-        if(mapper.adminRegister(admin)){
+        if(email != null && mapper.adminRegister(admin)){
             return password;
         }else{
             return null;
@@ -53,7 +53,7 @@ public class AdminService implements AdminServiceInter{
             return null;
         }
     }
-
+    @Override
     public String getinitialpassword(int length) {
         Random random = new Random();
         StringBuffer valSb = new StringBuffer();

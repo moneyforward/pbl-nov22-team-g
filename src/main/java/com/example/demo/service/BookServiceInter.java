@@ -5,7 +5,7 @@ import com.example.demo.pojo.*;
 import java.util.List;
 
 public interface BookServiceInter {
-    BookDetail findBookByTitle(String title);
+    Book findBookByTitle(String title);
     Book findbookbyID(int BookID);
     List<BookList> getBookList();
     List<BookDetail> getBookDetail(String title);
@@ -21,6 +21,7 @@ public interface BookServiceInter {
     List<Borrow> findoverdueBook(String status);
     String checkstatus(int userID);
     boolean returnBook(int BookID);
-
+    int minDistance(String word1, String word2);
+    String getStatus(int userID);
 
 }

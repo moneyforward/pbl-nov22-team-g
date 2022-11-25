@@ -12,8 +12,8 @@ public class BookService implements BookServiceInter{
     @Autowired
     private BookDao mapper;
     @Override
-    public BookDetail findBookByTitle(String title){
-        return mapper.findBookbyTitle("title");
+    public Book findBookByTitle(String title){
+        return mapper.findBookbyTitle(title);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class BookService implements BookServiceInter{
         book.setTitle(title);
         return mapper.updateUser(book);
     }
-
-    private int minDistance(String word1, String word2) {
+    @Override
+    public int minDistance(String word1, String word2) {
         int[][] dp = new int[word1.length() + 1][word2.length() + 1];
         for (int i = 0; i < word1.length() + 1; i++) {
             // 从i个字符变成0个字符，需要i步（删除）
@@ -113,7 +113,7 @@ public class BookService implements BookServiceInter{
             return "Baned by admin";
         }
         return null;
-    }
+    }@Override
     public String getStatus(int userID) {
         int count = mapper.getRecord(new String[]{"processing"},userID).size();
         if(count >10){

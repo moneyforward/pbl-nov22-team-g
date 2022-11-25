@@ -13,20 +13,20 @@ import java.util.List;
 
 public class BookDetailDaoTest {
     SqlSession sqlSession;
-    @Test
-    public void test(){
-
-
-        sqlSession = MybBatisUtils.getSqlSession();
-        BookDao mapper = sqlSession.getMapper(BookDao.class);
-        BookDetail result = mapper.findBookbyTitle("1984");
-
-
-        sqlSession.close();
-
-        System.out.println(result);
-
-    }
+//    @Test
+//    public void test(){
+//
+//
+//        sqlSession = MybBatisUtils.getSqlSession();
+//        BookDao mapper = sqlSession.getMapper(BookDao.class);
+//        BookDetail result = mapper.findBookbyTitle("1984");
+//
+//
+//        sqlSession.close();
+//
+//        System.out.println(result);
+//
+//    }
     @Test
     public void updateTest(){
         sqlSession = MybBatisUtils.getSqlSession();

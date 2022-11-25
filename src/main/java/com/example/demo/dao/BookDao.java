@@ -10,7 +10,7 @@ public interface BookDao {
     @Select("select title, author, count(*) stock, isbn from book GROUP BY title")
     List<BookList> getBookList();
     @Select("select * from Book where Title = #{title}")
-    BookDetail findBookbyTitle(String title);
+    Book findBookbyTitle(String title);
     @Select("select * from Book where Author = #{Author}")
     BookDetail findBookbyAuthor(String Author);
     @Select("select * from Book where BookID = #{BookID}")
@@ -24,13 +24,13 @@ public interface BookDao {
     @Select("SELECT Book.bookid, title, author, status, count(*),isbn FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
     List<BookDetail> getBookDetailByTitle(String title);
     @Insert("INSERT INTO plans(bookTitle, userId) values(#{title}, #{userId})")
-    void addReadPlan(String title, int userId);
+    void addReadPlan(@Param("title") String title, @Param("userId") int userId);
     @Insert("INSERT INTO borrow(StartDate, EndDate, Status, BookID, UserID) VALUES(NOW(), DATE_ADD(NOW(), INTERVAL 24 HOUR), 'pending', #{bookId}, #{userId})")
-    void reverseBook(int bookId, int userId);
+    void reverseBook(@Param("bookId") int bookId, @Param("userId")int userId);
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
     @Update("update borrow set status = #{status} where BookID = #{bookID} AND status='processing'")
-    boolean updatebookDetails(String status,int bookID);
+    boolean updatebookDetails(@Param("status") String status,@Param("bookID") int bookID);
 
     @Select("""
             SELECT ifnull(avail.bookid,0), plans.booktitle, avail.author, avail.status, ifnull(avail.statusCount, 0), isbn FROM
@@ -41,8 +41,8 @@ public interface BookDao {
             """)
     List<BookDetail> getReadPlan(int userId);
 
-    @Delete("DELETE FROM plans WHERE booktitle=#{title} AND userid=#{userId})")
-    void deletePlan(String title, int userId);
+    @Delete("DELETE FROM plans WHERE booktitle=#{title} AND userid=#{userId}")
+    void deletePlan(@Param("title") String title, @Param("userId") int userId);
     @Select("""
             <script>
             SELECT borrow.recordid, borrow.startdate, borrow.enddate, borrow.status, borrow.userid, borrow.bookid, book.title, book.author
@@ -51,12 +51,12 @@ public interface BookDao {
             AND borrow.userid=#{userId}
             </script>
             """)
-    List<BorrowDetails> getRecord(@Param("list") String[] status, int userId);
+    List<BorrowDetails> getRecord(@Param("list") String[] status, @Param("userId") int userId);
     @Update("UPDATE borrow SET Status='done' WHERE Status='pending' AND EndDate < NOW() AND userid=#{userId}")
     void updatePending(int userId);
 
     @Update("UPDATE borrow SET Status='overdue' WHERE Status='processing' AND EndDate < NOW() AND userid=#{userId}")
-    void updateProcessing(int userId);
+    void updateProcessing(@Param("userId") int userId);
     @Select("""
             select title, author, count(*) stock, isbn from book
             WHERE title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%')
