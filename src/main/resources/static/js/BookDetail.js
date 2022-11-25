@@ -46,6 +46,7 @@ function addReadPlan(){
 }
 function reserveBook(e){
     const titleVar = e===''? bookTitle:e;
+    console.log(e)
     if(!ifLogin("user")){
         location.href="/login"
     }
@@ -54,10 +55,10 @@ function reserveBook(e){
         data:{title: titleVar},
         async:true,
         success:function (flag){
-            if(flag) {
+            if(flag === "success") {
                 alert("'" + titleVar + "' has been added. Please go library and ask check out in 24H")
             }else{
-                alert("'" + titleVar + "' is out of stock or you are baned, please check")
+                alert("'" + titleVar + "' fail "+flag)
             }
         }
     })

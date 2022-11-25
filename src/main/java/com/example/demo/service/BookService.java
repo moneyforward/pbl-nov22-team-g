@@ -2,15 +2,27 @@ package com.example.demo.service;
 
 import com.example.demo.dao.BookDao;
 import com.example.demo.pojo.*;
+import com.example.demo.SearchRank;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Service
+@Component
 public class BookService implements BookServiceInter{
     @Autowired
     private BookDao mapper;
+
+    private SearchRank ranker;
+    @PostConstruct
+    private void init(){
+        ranker = new SearchRank(mapper.searchAllBook());
+    }
+
     @Override
     public Book findBookByTitle(String title){
         return mapper.findBookbyTitle(title);
@@ -85,19 +97,7 @@ public class BookService implements BookServiceInter{
     }
     @Override
     public List<BookList> searchBook(String query){
-        List<BookList> recallResult = mapper.searchBook(query);
-
-        HashMap<BookList, Integer> candidateSet = new HashMap<>();
-        // calculate score
-        for(BookList candidate: recallResult){
-            int score = minDistance(query, candidate.getTitle()) + minDistance(query, candidate.getAuthor()) + minDistance(query, candidate.getIsbn());
-            candidateSet.put(candidate, score);
-        }
-        List<Map.Entry<BookList, Integer>> list = new ArrayList<>(candidateSet.entrySet());
-        list.sort(Map.Entry.comparingByValue());
-        List<BookList> rankResult = new ArrayList<>();
-        list.forEach(entry->rankResult.add(entry.getKey()));
-        return rankResult;
+        return ranker.getRankList(query.toLowerCase());
     }
 
     @Override
@@ -106,6 +106,10 @@ public class BookService implements BookServiceInter{
         if(count >10){
             return "Check out books up to 10!";
         }
+        count = mapper.getRecord(new String[]{"pending"},userID).size();
+        if(count >5){
+            return "Reservation up to 5!";
+        }
         if(mapper.getRecord(new String[]{"overdue"},userID).size() != 0){
             return "Have overdue book!";
         }
@@ -113,18 +117,19 @@ public class BookService implements BookServiceInter{
             return "Baned by admin";
         }
         return null;
-    }@Override
+    }
+    // for the user profile init, need less time
     public String getStatus(int userID) {
-        int count = mapper.getRecord(new String[]{"processing"},userID).size();
-        if(count >10){
-            return "0";
-        }
+//        int count = mapper.getRecord(new String[]{"processing"},userID).size();
+//        if(count >10){
+//            return "0";
+//        }
         if(mapper.getRecord(new String[]{"overdue"},userID).size() != 0){
             return "1";
         }
-        if(mapper.getRecord(new String[]{"baned"},userID).size() != 0){
-            return "2";
-        }
+//        if(mapper.getRecord(new String[]{"baned"},userID).size() != 0){
+//            return "2";
+//        }
         return "-1";
     }
 
@@ -142,7 +147,7 @@ public class BookService implements BookServiceInter{
     @Override
     public boolean returnBook(int BookID) {
 //        BorrowDetails borrowDetails =mapper.findbookDetails(BookID,UserID);
-        return mapper.updatebookDetails("done",BookID);
+        return mapper.updatebookDetails("done", BookID);
     }
 
     @Override
