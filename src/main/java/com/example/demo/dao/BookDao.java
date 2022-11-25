@@ -64,6 +64,11 @@ public interface BookDao {
             """)
     List<BookList> searchBook(String query);
     @Select("""
+            select title, author, count(*) stock, isbn from book
+            GROUP BY title
+            """)
+    List<BookList> searchAllBook();
+    @Select("""
             select bookid, title, author, isbn from book
             WHERE title LIKE CONCAT('%',#{query},'%') OR author LIKE CONCAT('%',#{query},'%') OR isbn LIKE CONCAT('%',#{query},'%')
             
