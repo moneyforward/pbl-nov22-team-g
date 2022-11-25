@@ -63,7 +63,6 @@ public class BookService implements BookServiceInter{
 
     @Override
     public boolean editBook(int BookID,String title, String author, String ISBN) {
-
         Book book = mapper.findBookbyID(BookID);
         book.setAuthor(author);
         book.setISBN(ISBN);

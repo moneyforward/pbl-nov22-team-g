@@ -62,6 +62,7 @@ function checkOut(bookCode){
         type:"post",
         success:function (e){
             alert("Success!")
+            location.href=""
         }
     })
 }

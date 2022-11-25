@@ -96,7 +96,8 @@ public class SearchRank {
         list.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
         List<BookList> rankResult = new ArrayList<>();
         list.forEach(entry->rankResult.add(entry.getKey()));
-        return rankResult.subList(0, 20);
+
+        return rankResult.size()<20?rankResult:rankResult.subList(0, 20);
     }
 
     public List<BookList> getRankList(String query){
