@@ -123,7 +123,7 @@ public class BookService implements BookServiceInter{
     @Override
     public boolean returnBook(int BookID) {
 //        BorrowDetails borrowDetails =mapper.findbookDetails(BookID,UserID);
-        return mapper.updatebookDetails("done",BookID);
+        return mapper.updatebookDetails("done", BookID);
     }
 
     @Override

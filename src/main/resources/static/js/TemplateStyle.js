@@ -19,8 +19,8 @@ $(document).ready(
     '             href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="showDropdown(\'1\')">Services</a>\n' +
     '          <div class="dropdown-menu" id="dropdown1">\n' +
     '            <a class="dropdown-item" href="/profile#t_2">Read plans</a>\n' +
-    '            <a class="dropdown-item" href="/profile#t_3}">Reservation</a>\n' +
-    '            <a class="dropdown-item" href="#">Wish List(Tell us the book you want)å</a>\n' +
+    '            <a class="dropdown-item" href="/profile#t_3">Reservation</a>\n' +
+    '            <a class="dropdown-item" href="#">Wish List(Tell us the book you want)</a>\n' +
     '          </div>\n' +
     '        </li>\n' +
     '        <li class="nav-item">\n' +
@@ -34,7 +34,7 @@ $(document).ready(
     '             href="#" role="button" aria-haspopup="true" aria-expanded="false" onclick="showDropdown(\'2\')">username</a>\n' +
     '          <div class="dropdown-menu" id="dropdown2">\n' +
     '            <a class="dropdown-item" href="/profile">Profile</a>\n' +
-    '            <a class="dropdown-item" href="/profile#t_5}">ID QRcode</a>\n' +
+    '            <a class="dropdown-item" href="/profile#t_5">ID QRcode</a>\n' +
     '            <a class="dropdown-item" href="#">Setting</a>\n' +
     '          </div>\n' +
     '        </li>\n' +
@@ -46,7 +46,7 @@ $(document).ready(
     '      <a href="/login" id="login-btn" class="nav-link active">\n' +
     '        <input type="button" value="Log in" class="btn btn-primary">\n' +
     '      </a>\n' +
-    '      <input type="button" value="Log out" class="btn btn-primary" id="logout">\n' +
+    '      <input type="button" value="Log out" class="btn btn-primary" id="logout" onclick="logOut()">\n' +
     '    </div>\n' +
     '  </div>')
     }

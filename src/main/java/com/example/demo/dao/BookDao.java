@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 @Mapper
 public interface BookDao {
-    @Select("select title, author, count(*) stock, isbn from book GROUP BY title")
+    @Select("select title, author, count(*) stock, isbn from book WHERE BookID<>-1 GROUP BY title")
     List<BookList> getBookList();
     @Select("select * from Book where Title = #{title}")
     BookDetail findBookbyTitle(String title);
@@ -21,7 +21,7 @@ public interface BookDao {
     boolean updateUser(Book bookDetail);
     @Delete("delete from libsystem.Book where BookID = #{BookID}")
     boolean deletBook(int BookID);
-    @Select("SELECT Book.bookid, title, author, status, count(*),isbn FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
+    @Select("SELECT Book.bookid, title, author, status, count(*), isbn FROM (SELECT * FROM borrow WHERE status<>'done') borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} GROUP BY status")
     List<BookDetail> getBookDetailByTitle(String title);
     @Insert("INSERT INTO plans(bookTitle, userId) values(#{title}, #{userId})")
     void addReadPlan(String title, int userId);
@@ -29,19 +29,17 @@ public interface BookDao {
     void reverseBook(int bookId, int userId);
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
-    @Update("update borrow set status = #{status} where BookID = #{bookID} AND status='processing'")
+    @Update("update borrow set status = #{status} where BookID = #{bookID}")
     boolean updatebookDetails(String status,int bookID);
 
     @Select("""
-            SELECT ifnull(avail.bookid,0), plans.booktitle, avail.author, avail.status, ifnull(avail.statusCount, 0), isbn FROM
-            (SELECT book.bookid, title, author, status, count(*) statusCount,isbn
-            FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid
-            WHERE book.title IN (SELECT booktitle FROM plans WHERE userid=#{userId}) AND (status is null) GROUP BY status) avail
-            RIGHT JOIN plans ON avail.title=plans.bookTitle
+            SELECT Book.bookid, title, author, status, count(*), isbn
+            FROM (SELECT * FROM borrow WHERE status<>'done') borrow
+            RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title IN (SELECT bookTitle FROM plans WHERE userid=#{userId}) GROUP BY status, title                            
             """)
     List<BookDetail> getReadPlan(int userId);
 
-    @Delete("DELETE FROM plans WHERE booktitle=#{title} AND userid=#{userId})")
+    @Delete("DELETE FROM plans WHERE booktitle=#{title} AND userid=#{userId}")
     void deletePlan(String title, int userId);
     @Select("""
             <script>
