@@ -107,10 +107,10 @@ public class AdminController {
 
             String userStatus = bookService.checkstatus(user.getUserID());
             if(userStatus == null) {
-                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode(" + user.getUserID() + ")\">Check Reservation</button>" +
+                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode('" + user.getUserID() + "')\">Check Reservation</button>" +
                         "<button class=\"btn btn-danger\" onclick=\"banUser(" + user.getUserID() + ")\">Ban</button>");
             }else{
-                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode(" + user.getUserID() + ")\">Check Reservation</button>" +
+                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode('" + user.getUserID() + "')\">Check Reservation</button>" +
                         "<button class=\"btn btn-danger\" onclick=\"unBanUser(" + user.getUserID() + ")\">Active</button><p class=\"text-danger\">"+userStatus+"</p>");
             }
         }

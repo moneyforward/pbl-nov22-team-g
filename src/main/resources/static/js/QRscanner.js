@@ -34,18 +34,18 @@ function readUserQRCode(userCode){
                     '<th scope="row">'+record.title+'</th><td>'+record.author+'</td>' +
                     '<td>'+record.startStr+'</td><td>'+record.endStr+'</td><td>'+record.status+'</td></tr>'
             })
-            recordsHtml += '</tbody></table><button class="btn btn-success" onclick="checkIn('+userCode+')">Check In</button>'
+            recordsHtml += '</tbody></table><button class="btn btn-success" onclick="checkIn(\''+userCode+'\')">Check In</button>'
             $("#t_5").html(recordsHtml)
         }
     })
 }
 
-function checkIn(userid){
+function checkIn(userCode){
     $.ajax({
         url:"/checkInBook",
         type:"post",
-        data:{userCode:userid},
         async:false,
+        data:{userCode:userCode},
         success: function (e){
             if(!e){
                 alert("Invalid User")
@@ -61,8 +61,8 @@ function checkOut(bookCode){
     $.ajax({
         url:"/returnbook",
         data:{bookid:bookid},
-        type:"post",
         async:false,
+        type:"post",
         success:function (e){
             alert("Success!")
             location.href=""
