@@ -77,7 +77,7 @@ public class BookController {
         }
         if(bookId != -1) {
             bookService.reserveBook(bookId, Integer.parseInt(session.getAttribute("userid").toString()));
-            return "success!";
+            return "success";
         }
         return "unexpected error!";
     }
@@ -98,6 +98,12 @@ public class BookController {
     public boolean returnBook(@RequestParam("bookid")int bookid,
                              HttpSession session){
         return bookService.returnBook(bookid);
+    }
+
+    @RequestMapping("/checkInBook")
+    @ResponseBody
+    public boolean checkInBook(@RequestParam("userCode") int userId){
+        return bookService.checkInBook(userId);
     }
 
     @RequestMapping("/searchBook")

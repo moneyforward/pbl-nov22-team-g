@@ -32,6 +32,9 @@ public interface BookDao {
     @Update("update borrow set status = #{status} where BookID = #{bookID}")
     boolean updatebookDetails(String status,int bookID);
 
+    @Update("update borrow set status = #{status}, enddate=DATE_ADD(NOW(), INTERVAL 240 HOUR) where UserID = #{userID} AND status='pending'")
+    boolean checkIn(String status,int userID);
+
     @Select("""
             SELECT Book.bookid, title, author, status, count(*), isbn
             FROM (SELECT * FROM borrow WHERE status<>'done') borrow

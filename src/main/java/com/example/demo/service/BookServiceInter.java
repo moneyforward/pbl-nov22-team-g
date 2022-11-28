@@ -21,6 +21,7 @@ public interface BookServiceInter {
     List<Borrow> findoverdueBook(String status);
     String checkstatus(int userID);
     boolean returnBook(int BookID);
+    boolean checkInBook(int BookID);
     int minDistance(String word1, String word2);
     String getStatus(int userID);
 

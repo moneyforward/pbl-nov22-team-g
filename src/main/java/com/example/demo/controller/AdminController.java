@@ -95,7 +95,7 @@ public class AdminController {
 
     }
     @RequestMapping("/admin/searchUser")
-    public String searchUser(@RequestParam("key")String key,
+    public String searchUser(String key,
                              Model model){
         Users user = adminService.findUser(key);
         if(user == null){
