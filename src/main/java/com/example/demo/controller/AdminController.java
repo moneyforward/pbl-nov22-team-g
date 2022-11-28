@@ -95,7 +95,6 @@ public class AdminController {
 
     }
     @RequestMapping("/searchUser")
-    @ResponseBody
     public String searchUser(String userQuery,
                              Model model){
         Users user = adminService.findUser(userQuery);
@@ -116,7 +115,7 @@ public class AdminController {
                         "<button class=\"btn btn-danger\" onclick=\"unBanUser(" + user.getUserID() + ")\">Active</button><p class=\"text-danger\">"+userStatus+"</p>");
             }
         }
-        return "/admin/console";
+        return "/console";
     }
     @RequestMapping("/admin/userinfo")
     @ResponseBody
