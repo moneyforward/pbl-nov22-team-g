@@ -45,6 +45,7 @@ function checkIn(userid){
         url:"/checkInBook",
         type:"post",
         data:{userCode:userid},
+        async:"false",
         success: function (e){
             if(!e){
                 alert("Invalid User")

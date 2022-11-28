@@ -41,6 +41,7 @@ public class UserController {
             return "index";
         }else{
             model.addAttribute("msg","Wrong password or Email not registered.");
+            model.addAttribute("valid", "form-control is-invalid");
             return "user/login";
         }
     }
