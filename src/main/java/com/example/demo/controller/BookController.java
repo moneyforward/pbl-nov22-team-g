@@ -102,8 +102,8 @@ public class BookController {
 
     @RequestMapping("/checkInBook")
     @ResponseBody
-    public boolean checkInBook(@RequestParam("userCode") int userId){
-        return bookService.checkInBook(userId);
+    public boolean checkInBook(int userCode){
+        return bookService.checkInBook(userCode);
     }
 
     @RequestMapping("/searchBook")

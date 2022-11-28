@@ -43,6 +43,7 @@ function readUserQRCode(userCode){
 function checkIn(userid){
     $.ajax({
         url:"/checkInBook",
+        type:"post",
         data:{userCode:userid},
         success: function (e){
             if(!e){
