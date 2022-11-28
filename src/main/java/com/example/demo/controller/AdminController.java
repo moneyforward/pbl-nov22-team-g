@@ -94,10 +94,11 @@ public class AdminController {
         return "admin/console";
 
     }
-    @RequestMapping("/admin/searchUser")
-    public String searchUser(String key,
+    @RequestMapping("/searchUser")
+    @ResponseBody
+    public String searchUser(String userQuery,
                              Model model){
-        Users user = adminService.findUser(key);
+        Users user = adminService.findUser(userQuery);
         if(user == null){
             model.addAttribute("error","User does not exist.");
         }
