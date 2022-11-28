@@ -45,7 +45,7 @@ function checkIn(userid){
         url:"/checkInBook",
         type:"post",
         data:{userCode:userid},
-        async:"false",
+        async:false,
         success: function (e){
             if(!e){
                 alert("Invalid User")
@@ -62,6 +62,7 @@ function checkOut(bookCode){
         url:"/returnbook",
         data:{bookid:bookid},
         type:"post",
+        async:false,
         success:function (e){
             alert("Success!")
             location.href=""
