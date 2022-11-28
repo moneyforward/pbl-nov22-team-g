@@ -55,7 +55,6 @@ public class AdminController {
             model.addAttribute("msg","Add new book error");
             return "admin/console";
         }
-
     }
     //need a button to change the book details.
     @RequestMapping("/admin/searchsinglebook")
@@ -98,6 +97,7 @@ public class AdminController {
     public String searchUser(String userQuery,
                              Model model){
         Users user = adminService.findUser(userQuery);
+        System.out.println(user);
         if(user == null){
             model.addAttribute("error","User does not exist.");
         }
@@ -115,7 +115,8 @@ public class AdminController {
                         "<button class=\"btn btn-danger\" onclick=\"unBanUser(" + user.getUserID() + ")\">Active</button><p class=\"text-danger\">"+userStatus+"</p>");
             }
         }
-        return "/console";
+        System.out.println(model);
+        return "admin/console";
     }
     @RequestMapping("/admin/userinfo")
     @ResponseBody
