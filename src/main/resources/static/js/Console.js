@@ -42,7 +42,6 @@ function unBanUser(uid){
 
 
 function renderDetail(bid){
-    location.href="/console#t_3"
     $.ajax({
         url: "/admin/findbookbyID",
         type: "post",
@@ -65,6 +64,7 @@ function renderDetail(bid){
                 '<button type="submit" class="btn btn-primary btn-lg">Submit</button></form>')
         }
     })
+    location.href="/console#t_3"
 }
 function renderBlank(){
     $("#bookConsole").html('<form action="/admin/addbook">'+
