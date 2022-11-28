@@ -80,10 +80,7 @@ private BookServiceInter bookService;
     void checkstatus4() {
         bookService.checkstatus(4);
     }
-    @Test
-    void minDistance(){
-        bookService.minDistance("hello","nihao");
-    }
+
     @Test
     void getStatus2() {
         bookService.getStatus(4);

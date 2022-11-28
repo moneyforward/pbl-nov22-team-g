@@ -22,7 +22,6 @@ public interface BookServiceInter {
     String checkstatus(int userID);
     boolean returnBook(int BookID);
     boolean checkInBook(int BookID);
-    int minDistance(String word1, String word2);
     String getStatus(int userID);
 
 }

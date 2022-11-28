@@ -83,12 +83,12 @@ public class SearchRank {
 
             int authorCover = candidate.getAuthor().toLowerCase().indexOf(query);
             if(authorCover != -1) {
-                rankedSet.put(candidate, Math.abs(authorCover-10.)/10.);
+                rankedSet.put(candidate, rankedSet.getOrDefault(candidate, 0.)+Math.abs(authorCover-10.)/10.);
             }else {
                 double disScore = minDistance(query, candidate.getAuthor().toLowerCase());
                 double score = disScore * choiceScore;
                 if(score > 0.){
-                    rankedSet.put(candidate, score/10);
+                    rankedSet.put(candidate, rankedSet.getOrDefault(candidate, 0.)+(score/10.));
                 }
             }
         }
