@@ -95,15 +95,15 @@ public class BookController {
     }
     @RequestMapping("/returnbook")
     @ResponseBody
-    public boolean returnBook(@RequestParam("bookid") int bookid,
-                             HttpSession session){
+    public boolean returnBook(@RequestParam("bookid") int bookid){
         return bookService.returnBook(bookid);
     }
 
     @RequestMapping("/checkInBook")
-    @ResponseBody
-    public boolean checkInBook(String userCode){
-        return bookService.checkInBook(Integer.parseInt(userCode));
+    public String checkInBook(String userCode){
+        int userid = userCode.charAt(0) == 'u' ?(Integer.parseInt(userCode.substring(1))-414)/42:Integer.parseInt(userCode);
+        bookService.checkInBook(userid);
+        return "admin/console";
     }
 
     @RequestMapping("/searchBook")
