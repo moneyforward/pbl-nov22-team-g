@@ -101,9 +101,9 @@ public class BookController {
     }
 
     @RequestMapping("/checkInBook")
-    @ResponseBody
-    public boolean checkInBook(String userCode){
-        return bookService.checkInBook(Integer.parseInt(userCode));
+    public String checkInBook(String userCode){
+        bookService.checkInBook(Integer.parseInt(userCode));
+        return "admin/console";
     }
 
     @RequestMapping("/searchBook")
