@@ -21,7 +21,7 @@ function getReadPlans(){
                 planHtml += '<tr class="table-primary">' +
                     '<th scope="row" onclick="tableInnerLink(\''+plan.title+'\')">'+plan.title+'</th>' +
                     '<td onclick="tableInnerLink(\''+plan.title+'\')"><button class="'+btnClass+'">Reserve</button></td>' +
-                    '<td><button class="btn btn-danger btn-sm" onclick="deletePlan('+plan.title+')">Delete</button></td></tr>'
+                    '<td><button class="btn btn-danger btn-sm" onclick="deletePlan(\''+plan.title+'\')">Delete</button></td></tr>'
             })
             $("#planBody").html(planHtml)
         }
