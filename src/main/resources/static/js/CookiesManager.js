@@ -19,6 +19,9 @@ $(document).ready(function (){
         $("#logout").hide()
         $("#username").hide()
     }
+    if($.cookie("status")==null){
+        $("#overdueAlert").hide()
+    }
     if($.cookie("status")!=="-1") {
         if($.cookie("status")==="0"){
             $("#overdueAlert").text("Borrowed book is over 10")

@@ -57,8 +57,9 @@ public class BookService implements BookServiceInter{
 
     @Override
     public boolean addnewBook(String title, String author, String ISBN) {
-
-        return mapper.addBook(new Book(-1, title,author,ISBN));
+        boolean flag = mapper.addBook(new Book(-1, title,author,ISBN));
+        ranker = new SearchRank(mapper.searchAllBook());
+        return flag;
     }
 
     @Override
@@ -147,6 +148,10 @@ public class BookService implements BookServiceInter{
     public boolean returnBook(int BookID) {
 //        BorrowDetails borrowDetails =mapper.findbookDetails(BookID,UserID);
         return mapper.updatebookDetails("done", BookID);
+    }
+    @Override
+    public boolean checkInBook(int BookID) {
+        return mapper.checkIn("processing", BookID);
     }
 
     @Override

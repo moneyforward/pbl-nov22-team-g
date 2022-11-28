@@ -42,7 +42,7 @@ function readUserQRCode(userCode){
 
 function checkIn(userid){
     $.ajax({
-        url:"checkin",
+        url:"/checkInBook",
         data:{userCode:userid},
         success: function (e){
             if(!e){

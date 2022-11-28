@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/bootstrap.min.css">
     <link rel="stylesheet" href="/customize.css">
     <script type="text/javascript" src="/js/libs/jquery-3.6.1.min.js"></script>
-    <script type="text/javascript" src="/js/libs/jquery.cookie-1.4.1.min.js"></script>f
+    <script type="text/javascript" src="/js/libs/jquery.cookie-1.4.1.min.js"></script>
     <script type="text/javascript" src="/js/CookiesManager.js"></script>
     <script type="text/javascript" src="/js/ResponsiveAction.js"></script>
     <script type="text/javascript" src="/js/libs/jquery.qrcode.min.js"></script>
@@ -31,19 +31,16 @@
 </ul>
 <div id="tab_content">
     <div id="t_1" class="tab-pane">
-        <form class="d-flex" action="/admin/searchUser" method="post">
+        <form class="d-flex" method="post" action="/admin/searchUser">
             <input class="form-control me-sm-2" type="text" placeholder="Search" id="userSearch" name="key">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            <input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Search">
         </form>
-
         <ul class="list-group list-group-flush">
             <li class="list-group-item" th:text="${UserID}" id="userId"><</li>
             <li class="list-group-item" th:text="${Nickname}"></li>
             <li class="list-group-item" th:text="${Email}"></li>
         </ul>
-        <div id="userRecordDisplay" th:utext="${btnHtml}">
-
-        </div>
+        <div id="userRecordDisplay" th:utext="${btnHtml}"></div>
     </div>
     <div id="t_2" class="tab-pane">
         <form class="d-flex">
