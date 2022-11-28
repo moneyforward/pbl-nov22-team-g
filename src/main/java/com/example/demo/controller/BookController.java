@@ -95,15 +95,15 @@ public class BookController {
     }
     @RequestMapping("/returnbook")
     @ResponseBody
-    public boolean returnBook(@RequestParam("bookid")int bookid,
+    public boolean returnBook(@RequestParam("bookid") int bookid,
                              HttpSession session){
         return bookService.returnBook(bookid);
     }
 
     @RequestMapping("/checkInBook")
     @ResponseBody
-    public boolean checkInBook(int userCode){
-        return bookService.checkInBook(userCode);
+    public boolean checkInBook(String userCode){
+        return bookService.checkInBook(Integer.parseInt(userCode));
     }
 
     @RequestMapping("/searchBook")
