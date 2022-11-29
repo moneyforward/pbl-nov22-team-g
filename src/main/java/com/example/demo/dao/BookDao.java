@@ -22,7 +22,7 @@ public interface BookDao {
     boolean updateUser(Book bookDetail);
     @Delete("delete from libsystem.Book where BookID = #{BookID}")
     boolean deletBook(int BookID);
-    @Select("SELECT Book.bookid, title, author, status, count(*),isbn FROM borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
+    @Select("SELECT Book.bookid, title, author, status, count(*),isbn FROM (SELECT * FROM borrow WHERE Status<>'done') borrow RIGHT JOIN book ON borrow.bookid=book.bookid WHERE book.title=#{title} AND (status<>'done' or status is null) GROUP BY status")
     List<BookDetail> getBookDetailByTitle(String title);
     @Insert("INSERT INTO plans(bookTitle, userId) values(#{title}, #{userId})")
     void addReadPlan(@Param("title") String title, @Param("userId") int userId);

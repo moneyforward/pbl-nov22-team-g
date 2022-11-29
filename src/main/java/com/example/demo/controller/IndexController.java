@@ -46,4 +46,7 @@ public class IndexController {
 
     @GetMapping("/console")
     public String adminProfile(){return "admin/console";}
+
+    @GetMapping("/qr")
+    public String bookQR(){return "/bookQRGen";}
 }
