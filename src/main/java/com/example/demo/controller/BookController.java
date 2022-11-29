@@ -96,15 +96,17 @@ public class BookController {
     }
     @RequestMapping(method=RequestMethod.POST, value="/returnBook")
     @ResponseBody
-    public Boolean returnBook(String bookID){
-        return bookService.returnBook(Integer.parseInt(bookID));
+    public String returnBook(String bookID){
+        bookService.returnBook(Integer.parseInt(bookID));
+        return "";
     }
 
     @RequestMapping(method=RequestMethod.POST, value="/checkInBook")
     @ResponseBody
-    public Boolean checkInBook(String userCode){
+    public String checkInBook(String userCode){
         int userid = userCode.charAt(0) == 'u' ?(Integer.parseInt(userCode.substring(1))-414)/42:Integer.parseInt(userCode);
-        return bookService.checkInBook(userid);
+        bookService.checkInBook(userid);
+        return "";
     }
 
     @RequestMapping("/searchBook")
