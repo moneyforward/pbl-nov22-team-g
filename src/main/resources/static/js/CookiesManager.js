@@ -22,19 +22,20 @@ $(document).ready(function (){
     if($.cookie("status")==null){
         $("#overdueAlert").hide()
     }
-    if($.cookie("status")!=="-1") {
-        if($.cookie("status")==="0"){
-            $("#overdueAlert").text("Borrowed book is over 10")
-        }
-        if($.cookie("status")==="1"){
-            $("#overdueAlert").text("Book Overdue")
-        }
-        if($.cookie("status")==="2"){
-            $("#overdueAlert").text("Baned by librarians")
-        }
-    }else{
-        $("#overdueAlert").hide()
-    }
+    $("#overdueAlert").hide()
+    // if($.cookie("status")!=="-1") {
+    //     if($.cookie("status")==="0"){
+    //         $("#overdueAlert").text("Borrowed book is over 10")
+    //     }
+    //     if($.cookie("status")==="1"){
+    //         $("#overdueAlert").text("Book Overdue")
+    //     }
+    //     if($.cookie("status")==="2"){
+    //         $("#overdueAlert").text("Baned by librarians")
+    //     }
+    // }else{
+    //     $("#overdueAlert").hide()
+    // }
 })
 
 function logOut(){
