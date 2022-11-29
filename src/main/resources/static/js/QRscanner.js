@@ -47,11 +47,8 @@ function checkIn(userCode){
         async:false,
         data:{userCode:userCode},
         success: function (e){
-            if(!e){
-                alert("Invalid User")
-            }else{
-                location.href="/console"
-            }
+            alert(e)
+            location.href="/console"
         }
     })
 }

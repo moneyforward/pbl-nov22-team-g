@@ -105,8 +105,10 @@ public class BookController {
     @ResponseBody
     public String checkInBook(String userCode){
         int userid = userCode.charAt(0) == 'u' ?(Integer.parseInt(userCode.substring(1))-414)/42:Integer.parseInt(userCode);
+        String status = bookService.checkstatus(userid);
+        if(status!=null) return status;
         bookService.checkInBook(userid);
-        return "";
+        return "check in success!";
     }
 
     @RequestMapping("/searchBook")

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/libs/jquery-3.6.1.min.js"></script>
+    <script type="text/javascript" src="/js/libs/jquery.qrcode.min.js"></script>
+</head>
+<body>
+<div id="qr"></div>
+
+</body>
+<script>
+    function genQR(bid) {
+        $("#qr").qrcode({
+            render: "canvas",
+            text: "b" + (bid * 42 + 414),
+            background: "#ffffff",
+            foreground: "#000000",
+            src: '../saltedfish.png'
+        });
+    }
+    genQR(1)
+</script>
+</html>
