@@ -49,5 +49,22 @@ $(document).ready(
     '      <input type="button" value="Log out" class="btn btn-primary" id="logout" onclick="logOut()">\n' +
     '    </div>\n' +
     '  </div>')
+        const pageFoot=
+            '        <div class="row">\n' +
+            '          <div class="col-lg-12">\n' +
+            '            <ul class="list-unstyled">\n' +
+            '              <li class="float-end"><a href="#top">Back to top</a></li>\n' +
+            '              <li><a href="#">Blog</a></li>\n' +
+            '              <li><a href="#">Twitter</a></li>\n' +
+            '              <li><a href="https://github.com/moneyforward/pbl-nov22-team-g">GitHub</a></li>\n' +
+            '              <li><a href="#">Instagram</a></li>\n' +
+            '              <li><a href="#">Donate</a></li>\n' +
+            '            </ul>\n' +
+            '            <p>Made by <a href="#">Salted Fish</a>.</p>\n' +
+            '            <p>Code released under the <a href="https://github.com/thomaspark/bootswatch/blob/master/LICENSE">MIT License</a>.</p>\n' +
+            '            <p>Based on <a href="https://getbootstrap.com/" rel="nofollow">Bootstrap</a>. Web fonts from <a href="https://fonts.google.com/" rel="nofollow">Google</a>.</p>\n' +
+            '          </div>\n' +
+            '        </div>\n'
+        $("#footer").html(pageFoot)
     }
 )
