@@ -126,8 +126,8 @@ public class BookService implements BookServiceInter{
         return mapper.updatebookDetails("done", BookID);
     }
     @Override
-    public boolean checkInBook(int BookID) {
-        return mapper.checkIn("processing", BookID);
+    public boolean checkInBook(int UserID) {
+        return mapper.checkIn("processing", UserID);
     }
 
     @Override
