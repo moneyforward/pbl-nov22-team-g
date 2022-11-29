@@ -37,9 +37,10 @@
             <input class="btn btn-secondary my-2 my-sm-0" type="submit" value="Search">
         </form>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item" th:text="${UserID}" id="userId"><</li>
+            <li class="list-group-item" th:text="${UserID}" id="userId"></li>
             <li class="list-group-item" th:text="${Nickname}"></li>
             <li class="list-group-item" th:text="${Email}"></li>
+            <li class="list-group-item" th:text="${userMsg}" th:onclick="readUserQRCode([[${UserID}]]);location.href='#t_5'"></li>
         </ul>
         <div id="userRecordDisplay" th:utext="${btnHtml}"></div>
     </div>
@@ -80,13 +81,11 @@
         </table>
     </div>
     <div id="t_7" class="tab-pane">
-        <form action="/admin/addAdmin" method="post">
-            <div class="form-group">
-            <label class="col-form-label mt-4" for="inputDefault">Email</label>
-            <input type="text" name="email" class="form-control" placeholder="Enter the Email" id="inputDefault"></div>
-            <input class="btn btn-primary" type="submit" value="Create">
-        </form>
-        <p class="text-info" th:text="${msg}"></p>
+        <div class="form-group">
+        <label class="col-form-label mt-4" for="inputDefaultEmail">Email</label>
+        <input type="text" name="email" class="form-control" placeholder="Enter the Email" id="inputDefaultEmail"></div>
+        <input class="btn btn-primary" type="button" onclick="addAdmin($('#inputDefaultEmail').val())" value="Create">
+        <p class="text-info" id="initPass"></p>
     </div>
 </div>
 <script type="text/javascript">

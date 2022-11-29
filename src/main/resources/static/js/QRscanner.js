@@ -5,8 +5,8 @@ Html5Qrcode.getCameras().then(devices => {
         qrcode.start(cameraId, {fps:10, qrbox:260},
             (decodedText, decodedResult) => {
             if(decodedText.startsWith("u")){
-                location.href="/console#t_5"
                 readUserQRCode(decodedText)
+                location.href="#t_5"
             }
             if(decodedText.startsWith("b")){
                 checkOut(decodedText)
