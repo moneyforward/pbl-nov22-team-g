@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -55,9 +56,9 @@ public class BookController {
     }
     @RequestMapping("/deleteReadPlan")
     @ResponseBody
-    public boolean deleteReadPlan(String title, HttpSession session){
+    public String deleteReadPlan(String title, HttpSession session){
         bookService.deletePlan(title, Integer.parseInt(session.getAttribute("userid").toString()));
-        return true;
+        return "";
     }
 
     @RequestMapping("/reserveBook")
@@ -93,17 +94,17 @@ public class BookController {
     public List<BorrowDetails> getHistory(HttpSession session){
         return bookService.getRecord(new String[]{"done"}, Integer.parseInt(session.getAttribute("userid").toString()));
     }
-    @RequestMapping("/returnbook")
+    @RequestMapping(method=RequestMethod.POST, value="/returnBook")
     @ResponseBody
-    public boolean returnBook(@RequestParam("bookid") int bookid){
-        return bookService.returnBook(bookid);
+    public Boolean returnBook(String bookID){
+        return bookService.returnBook(Integer.parseInt(bookID));
     }
 
-    @RequestMapping("/checkInBook")
-    public String checkInBook(String userCode){
+    @RequestMapping(method=RequestMethod.POST, value="/checkInBook")
+    @ResponseBody
+    public Boolean checkInBook(String userCode){
         int userid = userCode.charAt(0) == 'u' ?(Integer.parseInt(userCode.substring(1))-414)/42:Integer.parseInt(userCode);
-        bookService.checkInBook(userid);
-        return "admin/console";
+        return bookService.checkInBook(userid);
     }
 
     @RequestMapping("/searchBook")

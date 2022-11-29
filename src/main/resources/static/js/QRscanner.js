@@ -50,7 +50,7 @@ function checkIn(userCode){
             if(!e){
                 alert("Invalid User")
             }else{
-                location.href="/console#t_5"
+                location.href="/console"
             }
         }
     })
@@ -59,8 +59,8 @@ function checkIn(userCode){
 function checkOut(bookCode){
     const bookid = (bookCode.substring(1)-414)/42
     $.ajax({
-        url:"/returnbook",
-        data:{bookid:bookid},
+        url:"/returnBook",
+        data:{bookID:bookid},
         async:false,
         type:"post",
         success:function (e){
