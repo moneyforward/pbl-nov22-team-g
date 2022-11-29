@@ -32,10 +32,10 @@ public class AdminController {
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        String encodepassword = bCryptPasswordEncoder.encode(password);
         Admin admin = adminService.adminLogin(email,password);
-        System.out.println(admin);
         if(admin !=null){
             request.getSession().setAttribute("adminid", admin.getAdminID());
             Cookie usernameCookie = new Cookie("Email", admin.getEmail());
+            usernameCookie.setMaxAge(12000);
             response.addCookie(usernameCookie);
             return "admin/console";
         }else{
@@ -90,7 +90,7 @@ public class AdminController {
         }else{
             model.addAttribute("msg","error!");
         }
-        return "/admin/console";
+        return "admin/console";
 
     }
     @RequestMapping("/searchUser")

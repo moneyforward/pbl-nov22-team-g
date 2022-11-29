@@ -7,19 +7,22 @@
     <script type="text/javascript" src="/js/libs/jquery.qrcode.min.js"></script>
 </head>
 <body>
+<input type="text" id="bookid" />
+<input type="button" onclick="genQR($('#bookid').val())" value="generator"><br>
 <div id="qr"></div>
 
 </body>
 <script>
     function genQR(bid) {
-        $("#qr").qrcode({
+        const qr = $("#qr")
+        qr.html("")
+        qr.qrcode({
             render: "canvas",
-            text: "b" + (bid * 42 + 414),
+            text: "b" + (Number(bid) * 42 + 414),
             background: "#ffffff",
             foreground: "#000000",
             src: '../saltedfish.png'
         });
     }
-    genQR(1)
 </script>
 </html>
