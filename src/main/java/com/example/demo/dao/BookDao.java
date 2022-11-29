@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import com.example.demo.pojo.*;
 import org.apache.ibatis.annotations.*;
+import org.springframework.security.core.parameters.P;
 
 
 import java.util.List;
@@ -30,10 +31,10 @@ public interface BookDao {
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
     @Update("update borrow set status = #{status} where BookID = #{bookID}")
-    boolean updatebookDetails(String status,int bookID);
+    boolean updatebookDetails(@Param("status") String status, int bookID);
 
     @Update("update borrow set status = #{status}, enddate=DATE_ADD(NOW(), INTERVAL 240 HOUR) where UserID = #{userID} AND status='pending'")
-    boolean checkIn(String status,int userID);
+    boolean checkIn(@Param("status") String status, int userID);
 
     @Select("""
             SELECT Book.bookid, title, author, status, count(*), isbn

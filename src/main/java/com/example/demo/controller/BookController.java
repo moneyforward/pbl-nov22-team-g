@@ -94,14 +94,14 @@ public class BookController {
     public List<BorrowDetails> getHistory(HttpSession session){
         return bookService.getRecord(new String[]{"done"}, Integer.parseInt(session.getAttribute("userid").toString()));
     }
-    @RequestMapping(method=RequestMethod.POST, value="/returnBook")
+    @RequestMapping("/returnBook")
     @ResponseBody
     public String returnBook(String bookID){
         bookService.returnBook(Integer.parseInt(bookID));
         return "";
     }
 
-    @RequestMapping(method=RequestMethod.POST, value="/checkInBook")
+    @RequestMapping("/checkInBook")
     @ResponseBody
     public String checkInBook(String userCode){
         int userid = userCode.charAt(0) == 'u' ?(Integer.parseInt(userCode.substring(1))-414)/42:Integer.parseInt(userCode);
