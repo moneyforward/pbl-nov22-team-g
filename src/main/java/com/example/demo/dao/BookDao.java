@@ -30,7 +30,7 @@ public interface BookDao {
     void reverseBook(@Param("bookId") int bookId, @Param("userId")int userId);
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
-    @Update("update borrow set status = #{status} where BookID = #{bookID}")
+    @Update("update borrow set status = #{status}, enddate=NOW() where BookID = #{bookID}")
     boolean updatebookDetails(@Param("status") String status, @Param("bookID") int bookID);
 
     @Update("update borrow set status = #{status}, enddate=DATE_ADD(NOW(), INTERVAL 240 HOUR) where UserID = #{userID} AND status='pending'")
@@ -88,4 +88,10 @@ public interface BookDao {
     
     @Select("select recordid, startdate, enddate, book.bookid, userid, status, book.title, book.isbn from borrow JOIN book ON borrow.bookid=book.bookid where Status = #{status}" )
     List<Borrow> getoverdueBook(String status);
+
+    @Update("UPDATE borrow SET Status='done' WHERE Status='pending' AND EndDate < NOW()")
+    void checkPendingExpire();
+
+    @Update("UPDATE borrow SET Status='overdue' WHERE Status='processing' AND EndDate < NOW()")
+    void checkProcessingExpire();
 }
