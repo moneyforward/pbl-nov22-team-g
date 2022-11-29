@@ -96,3 +96,15 @@ function searchBook(query){
         }
     })
 }
+
+function addAdmin(email){
+    $.ajax({
+        type: "post",
+        url: "/admin/addAdmin",
+        async: false,
+        data:{email:email},
+        success: function (e){
+            $("#initPass").text(e)
+        }
+    })
+}

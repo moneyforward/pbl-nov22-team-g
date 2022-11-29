@@ -82,16 +82,19 @@ public class AdminController {
 
     }
     @RequestMapping("/admin/addAdmin")
+    @ResponseBody
     public String addAdmin(@RequestParam("email")String email,
                            Model model){
         String password =adminService.addAdmin(email);
+        Cookie usernameCookie = new Cookie("initPass", password);
+        usernameCookie.setMaxAge(12000);
         if(password!=null){
             model.addAttribute("msg","add success!,initial password is "+password);
+            return "add success!,initial password is "+password;
         }else{
             model.addAttribute("msg","error!");
+            return "Unexpect error!";
         }
-        return "admin/console";
-
     }
     @RequestMapping("/searchUser")
     public String searchUser(String userQuery,
@@ -104,13 +107,14 @@ public class AdminController {
             model.addAttribute("UserID",user.getUserID());
             model.addAttribute("Nickname",user.getNickname());
             model.addAttribute("Email",user.getEmail());
+            model.addAttribute("userMsg", "Click to check user's reservation");
 
             String userStatus = bookService.checkstatus(user.getUserID());
             if(userStatus == null) {
-                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode('" + user.getUserID() + "')\">Check Reservation</button>" +
+                model.addAttribute("btnHtml",
                         "<button class=\"btn btn-danger\" onclick=\"banUser(" + user.getUserID() + ")\">Ban</button>");
             }else{
-                model.addAttribute("btnHtml", "<button class=\"btn btn-info\" type=\"button\" onclick=\"readUserQRCode('" + user.getUserID() + "')\">Check Reservation</button>" +
+                model.addAttribute("btnHtml",
                         "<button class=\"btn btn-danger\" onclick=\"unBanUser(" + user.getUserID() + ")\">Active</button><p class=\"text-danger\">"+userStatus+"</p>");
             }
         }
@@ -130,12 +134,12 @@ public class AdminController {
     @RequestMapping("/banUser")
     public String banUser(String userCode){
         adminService.banUser(Integer.parseInt(userCode));
-        return "/admin/console";
+        return "admin/console";
     }
 
     @RequestMapping("/unBanUser")
     public String unBanUser(String userCode){
         adminService.unBanUser(Integer.parseInt(userCode));
-        return "/admin/console";
+        return "admin/console";
     }
 }
