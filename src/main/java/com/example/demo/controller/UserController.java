@@ -32,11 +32,11 @@ public class UserController {
             request.getSession().setAttribute("userid", userInfo.getUserID());
             // need overdue status for session & cookie
             Cookie statusCookie = new Cookie("status", bookService.getStatus(userInfo.getUserID()));
-            statusCookie.setMaxAge(120);
+            statusCookie.setMaxAge(12000);
             response.addCookie(statusCookie);
 
             Cookie usernameCookie = new Cookie("username", userInfo.getNickname());
-            usernameCookie.setMaxAge(120);
+            usernameCookie.setMaxAge(12000);
             response.addCookie(usernameCookie);
             return "index";
         }else{
