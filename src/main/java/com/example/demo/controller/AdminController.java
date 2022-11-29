@@ -82,6 +82,7 @@ public class AdminController {
 
     }
     @RequestMapping("/admin/addAdmin")
+    @ResponseBody
     public String addAdmin(@RequestParam("email")String email,
                            Model model){
         String password =adminService.addAdmin(email);

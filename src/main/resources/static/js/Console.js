@@ -67,7 +67,7 @@ function renderDetail(bid){
     location.href="/console#t_3"
 }
 function renderBlank(){
-    $("#bookConsole").html('<form action="/admin/addbook">'+
+    $("#bookConsole").html('<form action="/admin/addbook" method="post">'+
         '<div class="form-group">' +
         '<label class="col-form-label mt-4" for="inputDefault">Title</label>' +
         '<input type="text" name="title" class="form-control" placeholder="Enter the title" id="inputDefault"></div>' +
