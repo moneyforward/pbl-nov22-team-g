@@ -31,10 +31,10 @@ public interface BookDao {
     @Select("SELECT * from borrow where BookID =#{bookid} AND UserID=#{userid}")
     BorrowDetails findbookDetails(int bookid, int userid);
     @Update("update borrow set status = #{status} where BookID = #{bookID}")
-    boolean updatebookDetails(@Param("status") String status, int bookID);
+    boolean updatebookDetails(@Param("status") String status, @Param("bookID") int bookID);
 
     @Update("update borrow set status = #{status}, enddate=DATE_ADD(NOW(), INTERVAL 240 HOUR) where UserID = #{userID} AND status='pending'")
-    boolean checkIn(@Param("status") String status, int userID);
+    boolean checkIn(@Param("status") String status, @Param("userID") int userID);
 
     @Select("""
             SELECT Book.bookid, title, author, status, count(*), isbn
